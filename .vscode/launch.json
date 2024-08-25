@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "compounds": [
     {
-      "name": "Main + renderer",
+      "name": "Main + Renderer",
       "configurations": ["Main", "Renderer"],
       "stopAll": true
     }

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('shadn.css');
 
 /* lock the root and boty */
 :root, body {
