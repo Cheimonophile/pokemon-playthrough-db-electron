@@ -7,10 +7,10 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"],
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "outDir": "dist",
     "moduleResolution": "node",
