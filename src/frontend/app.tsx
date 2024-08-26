@@ -1,43 +1,49 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { createRoot } from 'react-dom/client';
-import { MantineProvider, Tabs } from '@mantine/core';
+import { Button, Container, Flex, MantineProvider, ScrollAreaAutosize, Tabs } from '@mantine/core';
 import { mantineTheme } from "./config/mantineTheme";
 
+
+const values = ['1', '2', '3'] as const satisfies string[];
+
+type Values = typeof values[number]
 
 
 
 export const App: FC<{}> = () => {
+
+  /**
+   * The currently active page of the application
+   */
+  const [activeTab, setActiveTab] = useState<Values | null>(null);
+
   return (
     <MantineProvider theme={mantineTheme}>
-      <div>
-        <h1 className="bg-blue-500">App</h1>
-      </div>
 
-      <Tabs defaultValue="gallery">
-      <Tabs.List>
-        <Tabs.Tab value="gallery">
-          Gallery
-        </Tabs.Tab>
-        <Tabs.Tab value="messages" >
-          Messages
-        </Tabs.Tab>
-        <Tabs.Tab value="settings">
-          Settings
-        </Tabs.Tab>
-      </Tabs.List>
+      <Flex
+        direction="column">
 
-      <Tabs.Panel value="gallery">
-        Gallery tab content
-      </Tabs.Panel>
+        {/** Nav Bar */}
+          <Tabs
+            value={activeTab}
+            onChange={(v) => setActiveTab(values.find(inlist => inlist === v))}>
+            <Tabs.List>
+              <Tabs.Tab value="1" size="compact-xs">
+                Gallery
+              </Tabs.Tab>
+              <Tabs.Tab value="2" >
+                Messages
+              </Tabs.Tab>
+              <Tabs.Tab value="3">
+                Settings
+              </Tabs.Tab>
+            </Tabs.List>
+          </Tabs>
 
-      <Tabs.Panel value="messages">
-        Messages tab content
-      </Tabs.Panel>
+        <Button size="compact-xs">Press me to see active styles</Button>
 
-      <Tabs.Panel value="settings">
-        Settings tab content
-      </Tabs.Panel>
-    </Tabs>
+      </Flex>
+
     </MantineProvider>
   );
 }
