@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Version {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  generation Int
+  pokemon    Pokemon[]
+}
+
+model Pokemon {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  version   Version @relation(fields: [versionId], references: [id])
+  versionId Int
+}

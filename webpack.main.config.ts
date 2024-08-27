@@ -3,6 +3,8 @@ import type { Configuration } from 'webpack';
 import { rules } from './webpack.rules';
 import { plugins } from './webpack.plugins';
 
+const CopyPlugin = require("copy-webpack-plugin");
+
 export const mainConfig: Configuration = {
   /**
    * This is the main entry point for your application, it's the first file
@@ -13,7 +15,15 @@ export const mainConfig: Configuration = {
   module: {
     rules,
   },
-  plugins,
+  plugins: [
+    ...plugins,
+    new CopyPlugin({
+      patterns: [
+        { from: 'prisma/migrations', to: 'migrations' }
+      ]
+    })
+
+  ],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
   },

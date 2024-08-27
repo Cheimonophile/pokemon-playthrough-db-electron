@@ -9,6 +9,7 @@ export const App: FC<{}> = () => {
   return (
     <div>
       <h1>App</h1>
+      <button onClick={() => window.backend.setDatabase('')}>Press Me</button>
     </div>
   );
 }
