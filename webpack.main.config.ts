@@ -2,6 +2,7 @@ import type { Configuration } from 'webpack';
 
 import { rules } from './webpack.rules';
 import { plugins } from './webpack.plugins';
+import path from 'path';
 
 const CopyPlugin = require("copy-webpack-plugin");
 
@@ -26,5 +27,9 @@ export const mainConfig: Configuration = {
   ],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
+    alias: {
+      "@main": path.resolve(__dirname, 'src/main'),
+      "@common": path.resolve(__dirname, 'src/common'),
+    }
   },
 };

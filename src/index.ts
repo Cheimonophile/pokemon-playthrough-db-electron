@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { makeMigrationsMap } from './backend/prisma';
+import { makeMigrationsMap } from './main/prisma';
 
 
 

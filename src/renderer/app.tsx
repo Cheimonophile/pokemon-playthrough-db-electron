@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { createRoot } from 'react-dom/client';
-import { PkmnDb } from "./PkmnDb";
+import { PkmnDb } from "@renderer/PkmnDb";
 
 
 
