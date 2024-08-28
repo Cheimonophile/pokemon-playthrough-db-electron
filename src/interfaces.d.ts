@@ -1,11 +1,10 @@
 
-
-import { PkmnDb } from '@common/interfaces/PkmnDb.js'
+import { Bridge } from './renderer/interfaces/Bridge';
 
 
 
 declare global {
   interface Window {
-    readonly pkmndb: PkmnDb,
+    readonly bridge: Bridge,
   }
 }

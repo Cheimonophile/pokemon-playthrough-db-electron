@@ -48,6 +48,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@heroicons/react": "^2.1.5",
     "@prisma/client": "^5.18.0",
     "electron-squirrel-startup": "^1.0.1",
     "react": "^18.3.1",

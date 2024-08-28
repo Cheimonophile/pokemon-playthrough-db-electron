@@ -10,7 +10,7 @@ export const App: FC = () => {
   return (
     <div>
       <h1>App</h1>
-      <button onClick={() => window.pkmndb}>Press Me</button>
+      <button onClick={() => window.bridge}>Press Me</button>
       <p>{PkmnDb.page}</p>
       <p>{window.location.href}</p>
     </div>

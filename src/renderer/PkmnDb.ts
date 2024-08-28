@@ -1,4 +1,4 @@
-import { Page, PAGES } from "@common/interfaces/PkmnDb";
+import { Page, PAGES } from "@common/interfaces/Page";
 
 
 /**

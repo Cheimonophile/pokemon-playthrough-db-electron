@@ -2,13 +2,13 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 import { contextBridge, ipcRenderer } from "electron";
-import { PkmnDb } from "./common/interfaces/PkmnDb";
+import { Bridge } from "./renderer/interfaces/Bridge";
 
 
 
 
 
 
-contextBridge.exposeInMainWorld('backend', {
+contextBridge.exposeInMainWorld('bridge', {
   setDatabase: (databaseFilepath: string) => ipcRenderer.invoke('setDatabase', databaseFilepath)
-} satisfies PkmnDb);
+} satisfies Bridge);
