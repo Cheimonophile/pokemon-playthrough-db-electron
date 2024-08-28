@@ -26,6 +26,6 @@
  * ```
  */
 
-import './index.css';
+import './renderer/index.css';
 import './renderer/app'; // load the app
 
