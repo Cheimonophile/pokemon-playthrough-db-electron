@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import fs from "fs";
+import fs from "fs/promises";
 
 
 /**
@@ -31,27 +31,34 @@ const getMigrationFilepath = (migrationDirname: string) => `${getMigrationDir(mi
  * @param migrationName 
  * @returns 
  */
-const isMigration = (migrationName: string) => {
+const isMigration = async (migrationName: string): Promise<boolean> => {
   const migrationDir = getMigrationDir(migrationName);
-  if (!fs.statSync(migrationDir).isDirectory()) {
+  const dirStat = await fs.stat(migrationDir)
+  if (!dirStat.isDirectory()) {
     return false;
   }
   const migrationFilepath = getMigrationFilepath(migrationName);
-  const isMigration = fs.statSync(migrationFilepath).isFile()
-  return isMigration;
+  const fileState = await fs.stat(migrationFilepath)
+  const isFile = fileState.isFile();
+  return isFile;
 };
 
 
 /**
  * Makes the map of the migrations
  */
-export const makeMigrationsMap = (): Map<string, string> => {
-  const migrationNames = fs.readdirSync(MIGRATIONS_DIR).filter(isMigration)
+export const makeMigrationsMap = async (): Promise<Map<string, string>> => {
+  const migrationNames = (
+    await fs.readdir(MIGRATIONS_DIR)
+  ).sort();
   const migrationsMap = new Map<string, string>();
-  migrationNames.forEach((migrationName) => {
+  for (const migrationName of migrationNames) {
+    if (!await isMigration(migrationName)) {
+      continue;
+    }
     const migrationFilepath = getMigrationFilepath(migrationName)
-    const migrationSql = fs.readFileSync(migrationFilepath, "utf-8");
+    const migrationSql = await fs.readFile(migrationFilepath, "utf-8");
     migrationsMap.set(migrationName, migrationSql);
-  });
+  }
   return migrationsMap;
-}
+};

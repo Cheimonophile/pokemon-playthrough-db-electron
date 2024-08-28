@@ -25,7 +25,7 @@ const createWindow = (): void => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?page=home`);
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
@@ -54,7 +54,7 @@ app.on('activate', () => {
 });
 
 
-ipcMain.handle('setDatabase', (event, parameters) => {
+ipcMain.handle('setDatabase', async (event, parameters) => {
   console.log('setDatabase');
-  const migrations = makeMigrationsMap();
+  const migrations = await makeMigrationsMap();
 })

@@ -1,20 +1,11 @@
 
 
-/**
- * Fields exposed to rendered processes preload.js.
- */
-export interface WindowBackend {
+import { PkmnDb } from './common/interfaces/PkmnDb.js'
 
-  /**
-   * The path to the database file.
-   * 
-   * @param databasePath 
-   */
-  setDatabase(databasePath: string): Promise<void>
-}
+
 
 declare global {
   interface Window {
-    backend: WindowBackend
+    readonly pkmndb: PkmnDb,
   }
 }
