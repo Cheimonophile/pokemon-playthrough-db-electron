@@ -12,6 +12,7 @@ export const App: FC<{}> = () => {
       <h1>App</h1>
       <button onClick={() => window.pkmndb}>Press Me</button>
       <p>{PkmnDb.page}</p>
+      <p>{window.location.href}</p>
     </div>
   );
 }

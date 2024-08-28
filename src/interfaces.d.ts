@@ -1,6 +1,6 @@
 
 
-import { PkmnDb } from './common/interfaces/PkmnDb.js'
+import { PkmnDb } from '@common/interfaces/PkmnDb.js'
 
 
 
