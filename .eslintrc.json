@@ -13,4 +13,12 @@
     "plugin:import/typescript"
   ],
   "parser": "@typescript-eslint/parser"
+  // "no-restricted-imports": [
+  //   "error",
+  //   {
+  //     "patterns": [
+  //       ".*"
+  //     ]
+  //   }
+  // ]
 }
