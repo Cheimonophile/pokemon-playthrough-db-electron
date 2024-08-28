@@ -5,7 +5,7 @@ import { plugins } from './webpack.plugins';
 import path from 'path';
 
 /// 
-const CopyPlugin = require("copy-webpack-plugin"); // eslint-disable-line @typescript-eslint/no-var-requires
+const CopyPlugin = require("copy-webpack-plugin"); // eslint-disable-line @typescript-eslint/no-require-imports
 
 export const mainConfig: Configuration = {
   /**

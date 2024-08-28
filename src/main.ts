@@ -11,6 +11,7 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string; // eslint-disable-line 
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
