@@ -12,13 +12,13 @@
     "plugin:import/electron",
     "plugin:import/typescript"
   ],
-  "parser": "@typescript-eslint/parser",
-  "no-restricted-imports": [
-    "error",
-    {
-      "patterns": [
-        ".*"
-      ]
-    }
-  ]
+  "parser": "@typescript-eslint/parser"
+  // "no-restricted-imports": [
+  //   "error",
+  //   {
+  //     "patterns": [
+  //       ".*"
+  //     ]
+  //   }
+  // ]
 }
