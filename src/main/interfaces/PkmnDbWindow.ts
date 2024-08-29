@@ -1,5 +1,5 @@
-import { BrowserWindow } from "electron";
-import { Page } from "@common/interfaces/Page";
+import { BrowserWindow } from 'electron';
+
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -8,43 +8,29 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 /**
  * Interface for a window that displays information from the PkmnDb.
  */
-export abstract class PkmnDbWindow extends BrowserWindow {
+export abstract class PkmnDbWindow {
 
   /**
-   * The page being displayed in the window
+   * The window that displays information from the PkmnDb.
    */
-  private _page: Page;
-
+  protected window: BrowserWindow;
 
   /**
    * Constructor for the browser window.
    */
-  constructor(
-    
-    /**
-     * The page to display in the window.
-     */
-    page: Page
-  ) {
-    super({
+  constructor() {
+    this.window = new BrowserWindow({
       height: 600,
       width: 800,
+      show: false,
       webPreferences: {
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       },
     });
-    this._page = page;
-    const url = new URL(MAIN_WINDOW_WEBPACK_ENTRY);
-    url.searchParams.append('page', page);
-    const urlString = url.toString();
-    this.loadURL(urlString);
-  }
-
-  /**
-   * @returns the page being displayed in the window
-   */
-  get page(): Page {
-    return this._page;
+    this.window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    this.window.once('ready-to-show', () => {
+      this.window.show()
+    })
   }
 
 }
