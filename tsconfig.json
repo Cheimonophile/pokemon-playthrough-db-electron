@@ -15,11 +15,21 @@
     "jsx": "react-jsx",
     "noUncheckedIndexedAccess": true,
     "paths": {
-      "*": ["node_modules/*"],
-      "@main/*": ["./src/main/*"],
-      "@renderer/*": ["./src/renderer/*"],
-      "@common/*": ["./src/common/*"]
+      "*": [
+        "node_modules/*"
+      ],
+      "@main/*": [
+        "./src/main/*"
+      ],
+      "@renderer/*": [
+        "./src/renderer/*"
+      ],
+      "@common/*": [
+        "./src/common/*"
+      ]
     }
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ]
 }
