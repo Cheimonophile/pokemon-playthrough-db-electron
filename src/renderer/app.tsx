@@ -1,9 +1,9 @@
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, useContext, useMemo, useState } from "react";
 
 import { createRoot } from 'react-dom/client';
 
 import { Nav } from './components/Nav'
-import { Page } from './manifests/pageManifest'
+import { Page, pageManifest } from './manifests/pageManifest'
 
 
 /**
@@ -32,12 +32,20 @@ export const useAppContext = () => {
  */
 export const App: FC = () => {
   const [page, setPage] = useState<Page>("settings");
+
+  const { Component: PageComponent } = useMemo(() => pageManifest[page], [page]);
+
   return (
     <AppContext.Provider value={{ page, setPage }}>
       <div className="w-full h-full flex flex-row">
 
         {/** Sidebar */}
         <Nav />
+
+        {/** Main content */}
+        <div className="flex-1 overflow-hidden">
+          <PageComponent />
+        </div>
 
       </div>
     </AppContext.Provider>

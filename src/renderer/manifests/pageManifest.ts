@@ -1,4 +1,6 @@
 import { IconType } from "@renderer/components/Icon";
+import { SettingsPage } from "@renderer/components/pages/Settings";
+import { PageFC } from "@renderer/interfaces/components/PageFC";
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,14 +23,22 @@ export interface PageMetadata {
    * The page's icon
    */
   icon: IconType;
+
+  /**
+   * The page's component
+   */
+  Component: PageFC;
 }
 
-
+/**
+ * Manifest containing all of the pages available in the application
+ */
 export const pageManifest: {
   [key in Page]: PageMetadata
 } = {
   settings: {
     label: "Settings",
-    icon: "Cog6ToothIcon"
+    icon: "Cog6ToothIcon",
+    Component: SettingsPage
   }
 }
