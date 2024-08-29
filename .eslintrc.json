@@ -1,5 +1,7 @@
 {
-  "plugins": ["import"],
+  "plugins": [
+    "import"
+  ],
   "env": {
     "browser": true,
     "es6": true,
@@ -25,14 +27,7 @@
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-namespace": 0,
     "@typescript-eslint/no-unused-vars": 1,
-    "prefer-const": 1,
-    "no-restricted-imports": [
-      "error",
-      {
-        "patterns": [
-          "*..*"
-        ]
-      }
-    ]
+    "@typescript-eslint/no-empty-object-type": 1,
+    "prefer-const": 1
   }
 }

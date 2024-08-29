@@ -5,6 +5,7 @@
 
 /* lock the root and boty */
 :root, body {
+  font-size: 12px;
   @apply h-screen w-screen overflow-hidden;
 }
 
