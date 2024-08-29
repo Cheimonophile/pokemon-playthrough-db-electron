@@ -1,4 +1,4 @@
-import { Icon } from "./icons";
+import { Icon } from "./Icon";
 import { useAppContext } from "../app";
 import { FC, useMemo } from "react";
 import { Page, pageManifest } from "@renderer/manifests/pageManifest";

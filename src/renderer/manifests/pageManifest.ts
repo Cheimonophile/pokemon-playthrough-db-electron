@@ -1,4 +1,4 @@
-import { IconType } from "@renderer/components/icons";
+import { IconType } from "@renderer/components/Icon";
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
