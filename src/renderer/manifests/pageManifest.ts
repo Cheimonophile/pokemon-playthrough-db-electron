@@ -1,11 +1,12 @@
 import { IconType } from "@renderer/components/Icon";
-import { SettingsPage } from "@renderer/components/pages/Settings";
+import { SettingsPage } from "@renderer/components/pages/SettingsPage";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PAGES = [
   "settings",
+  "battles",
 ] as const satisfies string[];
 
 
@@ -39,6 +40,11 @@ export const pageManifest: {
   settings: {
     label: "Settings",
     icon: "Cog6ToothIcon",
+    Component: SettingsPage
+  },
+  battles: {
+    label: "Battles",
+    icon: "CircleStackIcon",
     Component: SettingsPage
   }
 }

@@ -39,18 +39,18 @@ export const NavButton: FC<NavButtonProps> = ({
 
   return (
     <button
-      className="p-2 flex flex-col items-center justify-center overflow-hidden text-ball-yellow relative"
+      className="p-2 flex flex-col items-center justify-center overflow-hidden text-ball-yellow relative hover:backdrop-brightness-90"
       onClick={() => setCurrentPage(page)}>
       <Icon
         className="size-6"
         style={iconStyle}
         icon={icon}
       />
-      <div className="text-xs truncate overflow-hidden w-full text-center">
+      <div className="text-xs w-full text-center">
         {label}
       </div>
       {isCurrentPage && (
-        <div className="absolute top-0 right-0 w-1 h-full p-1 bg-ball-red" />
+        <div className="absolute top-0 left-0 w-1 h-full bg-ball-yellow" />
       )}
     </button>
   )

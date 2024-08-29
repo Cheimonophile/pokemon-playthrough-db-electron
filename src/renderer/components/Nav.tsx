@@ -4,15 +4,10 @@ import { NavButton } from "./NavButton";
 
 export const Nav: FC = () => {
   return (
-    <div className="w-20 flex flex-col bg-ball-grey">
-
+    <div className="w-16 flex flex-col bg-ball-grey">
+      <NavButton page="battles" />
       <div className="flex-1" />
-
-      {/** Settings Panel */}
-      <NavButton
-        page="settings"
-      />
-
+      <NavButton page="settings" />
     </div>
   )
 }
