@@ -1,4 +1,5 @@
 import { IconType } from "@renderer/components/Icon";
+import { BattlesPage } from "@renderer/components/pages/BattlesPage";
 import { SettingsPage } from "@renderer/components/pages/SettingsPage";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 
@@ -45,6 +46,6 @@ export const pageManifest: {
   battles: {
     label: "Battles",
     icon: "CircleStackIcon",
-    Component: SettingsPage
+    Component: BattlesPage
   }
 }

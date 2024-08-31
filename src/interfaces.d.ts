@@ -1,5 +1,5 @@
 
-import { Bridge } from './renderer/interfaces/Bridge';
+import { Bridge } from './common/interfaces/Bridge';
 
 
 

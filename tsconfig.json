@@ -18,6 +18,9 @@
       "*": [
         "node_modules/*"
       ],
+      "@prisma/client/*": [
+        "./prisma/client/*"
+      ],
       "@main/*": [
         "./src/main/*"
       ],

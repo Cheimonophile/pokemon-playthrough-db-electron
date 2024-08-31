@@ -21,7 +21,8 @@ export const mainConfig: Configuration = {
     ...plugins,
     new CopyPlugin({
       patterns: [
-        { from: 'prisma/migrations', to: 'migrations' }
+        { from: 'prisma/migrations', to: 'prisma/migrations' },
+        { from: 'prisma/client', to: 'prisma/client' },
       ]
     })
 
@@ -29,6 +30,7 @@ export const mainConfig: Configuration = {
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
     alias: {
+      "@prisma": path.resolve(__dirname, 'prisma'),
       "@main": path.resolve(__dirname, 'src/main'),
       "@common": path.resolve(__dirname, 'src/common'),
     }
