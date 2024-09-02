@@ -6,7 +6,6 @@ import { contextBridge } from "electron";
 
 
 
-
 contextBridge.exposeInMainWorld('channels', channels);
 
 export type Channels = typeof channels;

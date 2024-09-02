@@ -36,11 +36,15 @@ export interface Channel<Params = unknown, Return = unknown> {
 
   /**
    * Invokes the channel
+   * 
+   * DO NOT CALL IN MAIN PROCESS; CAN ONLY BE USED IN RENDERER
    */
   readonly invoke: ChannelInvoke<Params, Return>;
 
   /**
    * Handler for the channel
+   * 
+   * DO NOT CALL IN RENDERER PROCESS; CAN ONLY BE USED IN MAIN
    */
   readonly handle: ChannelHandle<Params, Return>;
 }
