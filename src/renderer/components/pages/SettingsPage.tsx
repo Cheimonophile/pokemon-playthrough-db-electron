@@ -11,7 +11,7 @@ export const SettingsPage: PageFC = () => {
   /**
    * Get the database
    */
-  const database = useDatabase();
+  const databasePath = useDatabase();
 
 
   return (
@@ -20,7 +20,7 @@ export const SettingsPage: PageFC = () => {
 
       {/** Database Section */}
       <div>
-        <div className="text-lg">Current Database: {database?.path ?? <i>No Database is Currently Set</i>}</div>
+        <div className="text-lg">Current Database: {databasePath ?? <i>No Database is Currently Set</i>}</div>
         <div>́
 
 
