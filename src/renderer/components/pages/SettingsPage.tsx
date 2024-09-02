@@ -1,3 +1,4 @@
+import { useDatabase } from "@renderer/hooks/data/useDatabase";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 
 
@@ -7,6 +8,11 @@ import { PageFC } from "@renderer/interfaces/components/PageFC";
  */
 export const SettingsPage: PageFC = () => {
 
+  /**
+   * Get the database
+   */
+  const database = useDatabase();
+
 
   return (
     <div className="w-full h-full flex flex-col p-2 gap-2 overflow-y-auto">
@@ -14,7 +20,7 @@ export const SettingsPage: PageFC = () => {
 
       {/** Database Section */}
       <div>
-        <div className="text-lg">Current Database: { }</div>
+        <div className="text-lg">Current Database: {database?.path ?? <i>No Database is Currently Set</i>}</div>
         <div>́
 
 

@@ -1,6 +1,5 @@
 
-import { Bridge } from './common/interfaces/Bridge';
-
+import { Bridge } from './preload'
 
 
 declare global {

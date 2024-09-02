@@ -46,4 +46,10 @@ ipcMain.handle('setDatabase', async () => {
 })
 
 
-databaseManager.openDatabase('path/to/database');
+
+// add up responses to upc channels
+ipcMain.handle('getDatabase', async () => {
+  return databaseManager.path ? {
+    path: databaseManager.path
+  } : null;
+});
