@@ -8,7 +8,7 @@ import { useData } from "../useData";
 export function useDatabase() {
   const database = useData(
     useCallback(async () => {
-      return window.bridge.channels.getDatabase.invoke();
+      return await window.channels.getDatabase.invoke();
     }, [])
   )
   return database;

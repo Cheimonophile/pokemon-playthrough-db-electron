@@ -6,14 +6,7 @@ import { contextBridge } from "electron";
 
 
 
-/**
- * The Bridge object that will be exposed to the renderer process
- */
-const bridge = Object.freeze({
-  channels
-})
 
-export type Bridge = typeof bridge;
+contextBridge.exposeInMainWorld('channels', channels);
 
-
-contextBridge.exposeInMainWorld('bridge', bridge);
+export type Channels = typeof channels;

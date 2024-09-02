@@ -1,9 +1,9 @@
 
-import { Bridge } from './preload'
+import { Channels } from './preload'
 
 
 declare global {
   interface Window {
-    readonly bridge: Bridge,
+    readonly channels: Channels,
   }
 }
