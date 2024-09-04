@@ -9,6 +9,7 @@ import { Channel } from "./interfaces/Channel";
  * use window.channels instead
  */
 export const channels = Object.freeze({
+  createDatabase: makeChannel<void, void>("createDatabase"),
   getDatabase: makeChannel<void, string | null>("getDatabase"),
 } satisfies {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -21,12 +21,6 @@ class Observer {
 
 
   /**
-   * Value that gets incremented each time the observer is notified
-   */
-  private increment: number = 0;
-
-
-  /**
    * Add an observer
    */
   public addObserver(observer: ObserverFn) {
@@ -38,6 +32,15 @@ class Observer {
    */
   public removeObserver(observer: ObserverFn) {
     this.observers.delete(observer);
+  }
+
+  /**]
+   * Notify all observers
+   */
+  public async notify() {
+    await Promise.all(
+      Array.from(this.observers).map((observer) => observer())
+    );
   }
 }
 
