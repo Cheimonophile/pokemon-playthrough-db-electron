@@ -2,6 +2,7 @@ import { useDatabase } from "@renderer/hooks/data/useDatabase";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { observer } from "@renderer/observer";
 import { MouseEventHandler, useCallback } from "react";
+import { BallButton } from "../form/BallButton";
 
 
 
@@ -31,8 +32,8 @@ export const SettingsPage: PageFC = () => {
       {/** Database Section */}
       <div>
         <div className="text-lg">Current Database: {databasePath ?? <i>No Database is Currently Set</i>}</div>
-        <button onClick={onClickCreateDatabase} className="px-2 py-0.5 border rounded">Create Database</button>
-        <div>́
+        <BallButton onClick={onClickCreateDatabase} text="Create Database" />
+        <div>
 
 
         </div>

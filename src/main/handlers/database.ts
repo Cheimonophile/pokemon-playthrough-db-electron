@@ -21,7 +21,7 @@ channels.createDatabase.handle(async (event) => {
   const window = getBrowserWindowFromWebContents(event.sender);
   const filePath = await createDatabaseDialog(window);
   if (!filePath) {
-    throw new Error('No file path provided.');
+    return;
   }
   await deleteFileIfExists(filePath);
   await databaseManager.openDatabase(filePath);
