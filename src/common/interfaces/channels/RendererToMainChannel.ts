@@ -7,14 +7,14 @@ import { dialog, ipcMain, IpcMainInvokeEvent, ipcRenderer } from "electron";
 /**
  * Channel invoke interface
  */
-export interface ChannelInvoke<Params, Return> {
+export interface RendererToMainChannelInvoke<Params, Return> {
   (params: Params): Promise<Return>;
 }
 
 /**
  * Channel handle callback interface
  */
-export interface ChannelHandleCallback<Params, Return> {
+export interface RendererToMainChannelHandleCallback<Params, Return> {
   (event: IpcMainInvokeEvent, params: Params): Promise<Return>;
 }
 
@@ -22,8 +22,8 @@ export interface ChannelHandleCallback<Params, Return> {
 /**
  * Channel handle interface
  */
-export interface ChannelHandle<Params, Return> {
-  (callback: ChannelHandleCallback<Params, Return>): void;
+export interface RendererToMainChannelHandle<Params, Return> {
+  (callback: RendererToMainChannelHandleCallback<Params, Return>): void;
 }
 
 
@@ -32,21 +32,21 @@ export interface ChannelHandle<Params, Return> {
 /**
  * Channel interface
  */
-export interface Channel<Params = unknown, Return = unknown> {
+export interface RendererToMainChannel<Params = unknown, Return = unknown> {
 
   /**
    * Invokes the channel
    * 
    * DO NOT CALL IN MAIN PROCESS; CAN ONLY BE USED IN RENDERER
    */
-  readonly rendererInvoke: ChannelInvoke<Params, Return>;
+  readonly rendererInvoke: RendererToMainChannelInvoke<Params, Return>;
 
   /**
    * Handler for the channel
    * 
    * DO NOT CALL IN RENDERER PROCESS; CAN ONLY BE USED IN MAIN
    */
-  readonly mainHandle: ChannelHandle<Params, Return>;
+  readonly mainHandle: RendererToMainChannelHandle<Params, Return>;
 }
 
 /**
@@ -55,8 +55,8 @@ export interface Channel<Params = unknown, Return = unknown> {
  * @param channelName 
  * @returns 
  */
-export function makeChannel<Params, Return>(channelName: string): Channel<Params, Return> {
-  const channel: Channel<Params, Return> = {
+export function makeRendererToMainChannel<Params, Return>(channelName: string): RendererToMainChannel<Params, Return> {
+  const channel: RendererToMainChannel<Params, Return> = {
     rendererInvoke: async (params: Params) => {
       return ipcRenderer.invoke(channelName, params);
     },

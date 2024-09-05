@@ -1,4 +1,4 @@
-import { Channel, makeChannel } from "./interfaces/Channel";
+import { RendererToMainChannel, makeRendererToMainChannel } from "./interfaces/channels/RendererToMainChannel";
 
 /**
  * Channels available to the application
@@ -8,9 +8,9 @@ import { Channel, makeChannel } from "./interfaces/Channel";
  * use window.channels instead
  */
 export const channels = Object.freeze({
-  createDatabase: makeChannel<void, void>("createDatabase"),
-  getDatabase: makeChannel<void, string | null>("getDatabase"),
+  createDatabase: makeRendererToMainChannel<void, void>("createDatabase"),
+  getDatabase: makeRendererToMainChannel<void, string | null>("getDatabase"),
 } satisfies {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: Channel<any, any>;
+  [key: string]: RendererToMainChannel<any, any>;
 })
