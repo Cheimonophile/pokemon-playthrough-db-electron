@@ -9,7 +9,7 @@ import { deleteFileIfExists } from "@main/utility/fs";
 /**
  * Handler for getting the current database path
  */
-channels.getDatabase.handle(async () => {
+channels.getDatabase.mainHandle(async () => {
   return databaseManager.database?.path ?? null;
 })
 
@@ -17,7 +17,7 @@ channels.getDatabase.handle(async () => {
 /**
  * Handler for creating a new database
  */
-channels.createDatabase.handle(async (event) => {
+channels.createDatabase.mainHandle(async (event) => {
   const window = getBrowserWindowFromWebContents(event.sender);
   const filePath = await createDatabaseDialog(window);
   if (!filePath) {

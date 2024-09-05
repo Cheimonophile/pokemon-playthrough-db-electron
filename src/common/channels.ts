@@ -1,5 +1,4 @@
-import { makeChannel } from "./factories/makeChannel";
-import { Channel } from "./interfaces/Channel";
+import { Channel, makeChannel } from "./interfaces/Channel";
 
 /**
  * Channels available to the application

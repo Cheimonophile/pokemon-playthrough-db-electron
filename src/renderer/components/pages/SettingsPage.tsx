@@ -20,7 +20,7 @@ export const SettingsPage: PageFC = () => {
    * Function to create a new database when the create database button is pressed
    */
   const onClickCreateDatabase = useCallback<MouseEventHandler<HTMLButtonElement>>(async () => {
-    await window.channels.createDatabase.invoke();
+    await window.channels.createDatabase.rendererInvoke();
     await observer.notify();
   }, [])
 
