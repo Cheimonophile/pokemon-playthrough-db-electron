@@ -1,6 +1,5 @@
 import { useDatabase } from "@renderer/hooks/data/useDatabase";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
-import { observer } from "@renderer/observer";
 import { MouseEventHandler, useCallback } from "react";
 import { BallButton } from "../form/BallButton";
 
@@ -21,7 +20,6 @@ export const SettingsPage: PageFC = () => {
    */
   const onClickCreateDatabase = useCallback<MouseEventHandler<HTMLButtonElement>>(async () => {
     await window.channels.createDatabase.rendererInvoke();
-    await observer.notify();
   }, [])
 
 

@@ -7,23 +7,23 @@ import { dialog, ipcMain, IpcMainInvokeEvent, ipcRenderer } from "electron";
 /**
  * Channel invoke interface
  */
-export interface RendererToMainChannelInvoke<Params, Return> {
-  (params: Params): Promise<Return>;
+export interface RendererToMainChannelInvoke<P, R> {
+  (params: P): Promise<R>;
 }
 
 /**
  * Channel handle callback interface
  */
-export interface RendererToMainChannelHandleCallback<Params, Return> {
-  (event: IpcMainInvokeEvent, params: Params): Promise<Return>;
+export interface RendererToMainChannelHandleCallback<P, R> {
+  (event: IpcMainInvokeEvent, params: P): Promise<R>;
 }
 
 
 /**
  * Channel handle interface
  */
-export interface RendererToMainChannelHandle<Params, Return> {
-  (callback: RendererToMainChannelHandleCallback<Params, Return>): void;
+export interface RendererToMainChannelHandle<P, R> {
+  (callback: RendererToMainChannelHandleCallback<P, R>): void;
 }
 
 
@@ -32,21 +32,21 @@ export interface RendererToMainChannelHandle<Params, Return> {
 /**
  * Channel interface
  */
-export interface RendererToMainChannel<Params = unknown, Return = unknown> {
+export interface RendererToMainChannel<P = unknown, R = unknown> {
 
   /**
    * Invokes the channel
    * 
    * DO NOT CALL IN MAIN PROCESS; CAN ONLY BE USED IN RENDERER
    */
-  readonly rendererInvoke: RendererToMainChannelInvoke<Params, Return>;
+  readonly rendererInvoke: RendererToMainChannelInvoke<P, R>;
 
   /**
    * Handler for the channel
    * 
    * DO NOT CALL IN RENDERER PROCESS; CAN ONLY BE USED IN MAIN
    */
-  readonly mainHandle: RendererToMainChannelHandle<Params, Return>;
+  readonly mainHandle: RendererToMainChannelHandle<P, R>;
 }
 
 /**
@@ -55,9 +55,9 @@ export interface RendererToMainChannel<Params = unknown, Return = unknown> {
  * @param channelName 
  * @returns 
  */
-export function makeRendererToMainChannel<Params, Return>(channelName: string): RendererToMainChannel<Params, Return> {
-  const channel: RendererToMainChannel<Params, Return> = {
-    rendererInvoke: async (params: Params) => {
+export function makeRendererToMainChannel<P, R>(channelName: string): RendererToMainChannel<P, R> {
+  const channel: RendererToMainChannel<P, R> = {
+    rendererInvoke: async (params: P) => {
       return ipcRenderer.invoke(channelName, params);
     },
     mainHandle: (callback) => {

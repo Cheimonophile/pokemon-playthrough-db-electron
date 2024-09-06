@@ -1,5 +1,6 @@
 import { PkmnDbWindow } from "@main/interfaces/PkmnDbWindow";
 import { HomeWindow } from "../windows/HomeWindow";
+import { observerChannel } from "@common/channels";
 
 
 
@@ -9,7 +10,6 @@ import { HomeWindow } from "../windows/HomeWindow";
  * The currently displayed window of the application.
  */
 let window: PkmnDbWindow | null = null;
-
 
 
 /**
@@ -32,9 +32,19 @@ const getOrCreateWindow = (): PkmnDbWindow => {
 }
 
 /**
+ * Notifies the window that the state has changed
+ */
+function notify(): void {
+  if (window) {
+    observerChannel.mainSend(undefined, window?.webContents);
+  }
+}
+
+/**
  * Object that manages the windows of the application.
  */
 export const WindowManager = Object.freeze({
   getWindow,
-  getOrCreateWindow
+  getOrCreateWindow,
+  notify,
 });
