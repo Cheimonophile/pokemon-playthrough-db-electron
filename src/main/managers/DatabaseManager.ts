@@ -1,6 +1,6 @@
 
 
-import { Database } from '@main/classes/Database';
+import { DatabaseConnection } from '@main/classes/Database';
 
 
 /**
@@ -11,16 +11,16 @@ class DatabaseManager {
   /**
    * The currently connected database
    */
-  private _database: Database | null = null;
+  private _database: DatabaseConnection | null = null;
 
 
   /**
    * The currently connected database
    */
-  public get database(): Database | null {
+  public get database(): DatabaseConnection | null {
     return this._database;
   }
-  private set database(database: Database | null) {
+  private set database(database: DatabaseConnection | null) {
     this._database = database;
   }
 
@@ -30,7 +30,7 @@ class DatabaseManager {
    * If the database doesn't exist, creates it.
    */
   async openDatabase(path: string) {
-    this._database = await Database.open(path);
+    this._database = await DatabaseConnection.open(path);
   }
 
 }

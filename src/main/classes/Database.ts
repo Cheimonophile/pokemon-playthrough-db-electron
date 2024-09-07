@@ -96,7 +96,7 @@ export async function migrate(prisma: PrismaClient) {
 /**
  * Class that keeps track of a prisma connection
  */
-export class Database {
+export class DatabaseConnection {
 
 
   private constructor(
@@ -120,12 +120,12 @@ export class Database {
    * 
    * @param filePath The path of the database
    */
-  static async open(filePath: string): Promise<Database> {
+  static async open(filePath: string): Promise<DatabaseConnection> {
     const prisma = new PrismaClient({
       datasourceUrl: `file:${filePath}`
     });
     await migrate(prisma);
-    const database = new Database(filePath, prisma);
+    const database = new DatabaseConnection(filePath, prisma);
     return database
   }
 
