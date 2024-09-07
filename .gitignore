@@ -94,3 +94,4 @@ out/
 # Prisma
 /prisma/*.db*
 /prisma/client
+/prisma/prisma-client

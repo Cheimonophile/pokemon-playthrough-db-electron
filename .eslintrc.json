@@ -16,7 +16,8 @@
     "plugin:import/typescript"
   ],
   "ignorePatterns": [
-    "prisma/*"
+    "prisma/*",
+    "out/*"
   ],
   "parser": "@typescript-eslint/parser",
   "settings": {
