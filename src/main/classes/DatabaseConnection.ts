@@ -121,6 +121,8 @@ export class DatabaseConnection {
    * @param filePath The path of the database
    */
   static async open(filePath: string): Promise<DatabaseConnection> {
+    // wait 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 3000));
     const prisma = new PrismaClient({
       datasourceUrl: `file:${filePath}`
     });

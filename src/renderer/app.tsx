@@ -1,9 +1,10 @@
-import { createContext, FC, useContext, useMemo, useState } from "react";
+import { createContext, FC, useCallback, useContext, useMemo, useState } from "react";
 
 import { createRoot } from 'react-dom/client';
 
 import { Nav } from './components/Nav'
 import { Page, pageManifest } from './manifests/pageManifest'
+import { Icon } from "./components/Icon";
 
 
 /**
@@ -12,6 +13,8 @@ import { Page, pageManifest } from './manifests/pageManifest'
 const AppContext = createContext<{
   page: Page;
   setPage: (page: Page) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 } | null>(null);
 
 
@@ -31,12 +34,38 @@ export const useAppContext = () => {
  * Core component of the application
  */
 export const App: FC = () => {
-  const [page, setPage] = useState<Page>("settings");
+
+  // ui state
+  const [page, setPage] = useState<Page>("battles");
+  const [loadingCount, setLoadingCount] = useState(0);
 
   const { Component: PageComponent } = useMemo(() => pageManifest[page], [page]);
 
+  /**
+   * Whether the app is loading
+   */
+  const isLoading = loadingCount > 0;
+
+  /**
+   * Set whether the app is loading
+   */
+  const setIsLoading = useCallback((isLoading: boolean) => {
+    setLoadingCount(
+      prevLoadingCount => isLoading
+        ? prevLoadingCount + 1
+        : prevLoadingCount - 1
+    );
+  }, []);
+
+
   return (
-    <AppContext.Provider value={{ page, setPage }}>
+    <AppContext.Provider
+      value={{
+        page,
+        setPage,
+        isLoading,
+        setIsLoading,
+      }}>
       <div className="w-full h-full flex flex-row">
 
         {/** Sidebar */}
@@ -48,6 +77,15 @@ export const App: FC = () => {
         </div>
 
       </div>
+
+      {/** Cover for if the application is loading */}
+      {isLoading && (
+        <div className="fixed inset-0 backdrop-brightness-90 flex items-center justify-center z-50">
+          <div className="w-8 h-8 animate-spin">
+            <Icon icon="ArrowPathIcon" style="solid" />
+          </div>
+        </div>
+      )}
     </AppContext.Provider>
   );
 }

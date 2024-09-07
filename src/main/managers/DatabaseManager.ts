@@ -1,6 +1,6 @@
+import { DatabaseConnection } from "@main/classes/DatabaseConnection";
 
 
-import { DatabaseConnection } from '@main/classes/Database';
 
 
 /**
