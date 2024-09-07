@@ -1,5 +1,7 @@
 {
-  "plugins": ["import"],
+  "plugins": [
+    "import"
+  ],
   "env": {
     "browser": true,
     "es6": true,
@@ -13,23 +15,22 @@
     "plugin:import/electron",
     "plugin:import/typescript"
   ],
+  "ignorePatterns": [
+    "prisma/*"
+  ],
   "parser": "@typescript-eslint/parser",
   "settings": {
     "import/resolver": {
-      "typescript": {
-        // ""
-      }
+      "typescript": {}
     }
   },
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
-    "no-restricted-imports": [
-      "error",
-      {
-        "patterns": [
-          "*..*"
-        ]
-      }
-    ]
+    "@typescript-eslint/no-namespace": 0,
+    "@typescript-eslint/no-unused-vars": 1,
+    "@typescript-eslint/no-empty-object-type": 1,
+    "@typescript-eslint/no-unused-expressions": 1,
+    "no-empty": 1,
+    "prefer-const": 1
   }
 }

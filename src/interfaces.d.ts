@@ -1,11 +1,10 @@
 
-
-import { PkmnDb } from '@common/interfaces/PkmnDb.js'
-
+import { Channels, ObserverChannel } from './preload'
 
 
 declare global {
   interface Window {
-    readonly pkmndb: PkmnDb,
+    readonly channels: Channels,
+    readonly observerChannel: ObserverChannel,
   }
 }

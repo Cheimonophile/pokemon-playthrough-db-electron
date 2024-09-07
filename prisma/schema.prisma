@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./client"
 }
 
 datasource db {
@@ -12,9 +13,18 @@ model Version {
   name       String    @unique
   generation Int
   pokemon    Pokemon[]
+
+  ball Ball[]
 }
 
 model Pokemon {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  version   Version @relation(fields: [versionId], references: [id])
+  versionId Int
+}
+
+model Ball {
   id        Int     @id @default(autoincrement())
   name      String  @unique
   version   Version @relation(fields: [versionId], references: [id])
