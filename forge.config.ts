@@ -14,6 +14,7 @@ import { rendererConfig } from './webpack.renderer.config';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    icon: './icons/ball',
     extraResource: [
       './prisma/migrations',
       './prisma/prisma-client',
