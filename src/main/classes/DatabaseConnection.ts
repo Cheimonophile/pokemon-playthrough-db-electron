@@ -1,5 +1,5 @@
 
-import { PrismaClient, PrismaPromise } from "@prisma-client";
+import { PrismaClient, PrismaPromise } from "@prisma/client";
 import fs from "fs";
 import { app } from "electron";
 import path from "path";

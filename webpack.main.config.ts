@@ -21,7 +21,7 @@ export const mainConfig: Configuration = {
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
     alias: {
-      "@prisma-client": path.resolve(__dirname, 'prisma', 'prisma-client'),
+      "@prisma/client": path.resolve(__dirname, 'prisma', 'prisma-client'),
       "@main": path.resolve(__dirname, 'src/main'),
       "@common": path.resolve(__dirname, 'src/common'),
     }
