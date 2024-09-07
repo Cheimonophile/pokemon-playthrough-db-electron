@@ -2,7 +2,7 @@ import { channels } from "@common/channels";
 import { databaseManager } from "@main/managers/DatabaseManager";
 import { WindowManager } from "@main/managers/WindowManager";
 import { getBrowserWindowFromWebContents } from "@main/utility/electron";
-import { createDatabaseDialog } from "@main/utility/electron/dialog";
+import { createDatabaseDialog, openDatabaseDialog } from "@main/utility/electron/dialog";
 import { deleteFileIfExists } from "@main/utility/fs";
 
 
@@ -28,3 +28,19 @@ channels.createDatabase.mainHandle(async (event) => {
   await databaseManager.openDatabase(filePath);
   WindowManager.notify();
 })
+
+
+
+
+/**
+ * Handler for opening an existing database
+ */
+channels.openDatabase.mainHandle(async (event) => {
+  const window = getBrowserWindowFromWebContents(event.sender);
+  const filePath = await openDatabaseDialog(window);
+  if (!filePath) {
+    return;
+  }
+  await databaseManager.openDatabase(filePath);
+  WindowManager.notify();
+});

@@ -18,8 +18,16 @@ export const SettingsPage: PageFC = () => {
   /**
    * Function to create a new database when the create database button is pressed
    */
-  const onClickCreateDatabase = useCallback<MouseEventHandler<HTMLButtonElement>>(async () => {
+  const handleOnClickCreateDatabase = useCallback<MouseEventHandler<HTMLButtonElement>>(async () => {
     await window.channels.createDatabase.rendererInvoke();
+  }, [])
+
+
+  /**
+   * Function to open a database when the open database button is pressed
+   */
+  const handleOnClickOpenDatabase = useCallback<MouseEventHandler<HTMLButtonElement>>(async () => {
+    await window.channels.openDatabase.rendererInvoke();
   }, [])
 
 
@@ -30,11 +38,13 @@ export const SettingsPage: PageFC = () => {
       {/** Database Section */}
       <div>
         <div className="text-lg">Current Database: {databasePath ?? <i>No Database is Currently Set</i>}</div>
-        <BallButton onClick={onClickCreateDatabase} text="Create Database" />
-        <div>
 
-
+        {/** Buttons */}
+        <div className="flex gap-1">
+          <BallButton onClick={handleOnClickCreateDatabase} text="Create Database" />
+          <BallButton onClick={handleOnClickOpenDatabase} text="Open Database" />
         </div>
+
 
 
 

@@ -1,5 +1,5 @@
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, PrismaPromise } from "@prisma/client";
 import fs from "fs/promises";
 
 
@@ -71,6 +71,7 @@ export const getMigrations = async (): Promise<Array<string>> => {
  * @param prisma 
  */
 export async function migrate(prisma: PrismaClient) {
+  const executePromises: PrismaPromise<number>[] = [];
   const [{ user_version: userVersion }] = await prisma.$queryRaw<[{ user_version: number }]>`PRAGMA user_version;`;
   const migrations = await getMigrations();
   for (let i = userVersion; i < migrations.length; i++) {
@@ -78,9 +79,16 @@ export async function migrate(prisma: PrismaClient) {
     if (!migration) {
       throw new Error(`Migration ${i} does not exist.`);
     }
-    await prisma.$executeRawUnsafe(migration);
+    const migrationPromises = migration
+      .split(";")
+      .slice(0, -1) // remove whitespace after last semicolon
+      .map(statement => prisma.$executeRawUnsafe(statement));
+    executePromises.push(...migrationPromises);
   }
-  await prisma.$executeRawUnsafe(`PRAGMA user_version = ${migrations.length};`);
+  executePromises.push(
+    prisma.$executeRawUnsafe(`PRAGMA user_version = ${migrations.length};`)
+  );
+  await prisma.$transaction(executePromises);
 }
 
 

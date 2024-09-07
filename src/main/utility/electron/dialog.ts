@@ -22,3 +22,27 @@ export async function createDatabaseDialog(window: BrowserWindow): Promise<strin
   }
   return saveReturn.filePath
 }
+
+
+
+
+/**
+ * Dialog for opening a database file
+ */
+export async function openDatabaseDialog(window: BrowserWindow): Promise<string | null> {
+  const openReturn = await dialog.showOpenDialog(window, {
+    title: 'Open Database',
+    message: 'Open an existing pokemon playthrough database.',
+    buttonLabel: 'Open',
+    filters: [{ name: 'PkmnDb', extensions: ['pkmndb'] }],
+    properties: [
+      'openFile',
+      'createDirectory',
+      'dontAddToRecent'
+    ]
+  })
+  if (openReturn.canceled) {
+    return null;
+  }
+  return openReturn.filePaths[0] ?? null;
+}
