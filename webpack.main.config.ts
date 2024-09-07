@@ -4,9 +4,6 @@ import { rules } from './webpack.rules';
 import { plugins } from './webpack.plugins';
 import path from 'path';
 
-/// 
-const CopyPlugin = require("copy-webpack-plugin"); // eslint-disable-line @typescript-eslint/no-require-imports
-
 export const mainConfig: Configuration = {
   /**
    * This is the main entry point for your application, it's the first file
@@ -18,19 +15,13 @@ export const mainConfig: Configuration = {
     rules,
   },
   plugins: [
-    ...plugins,
-    new CopyPlugin({
-      patterns: [
-        { from: 'prisma/migrations', to: 'prisma/migrations' },
-        { from: 'prisma/client', to: 'prisma/client' },
-      ]
-    })
+    ...plugins
 
   ],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
     alias: {
-      "@prisma": path.resolve(__dirname, 'prisma'),
+      "@prisma-client": path.resolve(__dirname, 'prisma', 'prisma-client'),
       "@main": path.resolve(__dirname, 'src/main'),
       "@common": path.resolve(__dirname, 'src/common'),
     }

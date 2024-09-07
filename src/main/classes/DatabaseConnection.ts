@@ -1,12 +1,54 @@
 
-import { PrismaClient, PrismaPromise } from "@prisma/client";
-import fs from "fs/promises";
-
+import { PrismaClient, PrismaPromise } from "@prisma-client";
+import fs from "fs";
+import { app } from "electron";
+import path from "path";
 
 /**
  * The directory of the migrations.
  */
-const MIGRATIONS_DIR = `${__dirname}/prisma/migrations`;
+const MIGRATIONS_DIR = app.isPackaged
+  ? path.join(process.resourcesPath, 'migrations')
+  : path.join(app.getAppPath(), 'prisma', 'migrations');
+
+
+/**
+ * The directory of the prisma client.
+ */
+const PRISMA_CLIENT_DIR = app.isPackaged
+  ? path.join(process.resourcesPath, 'prisma-client')
+  : path.join(app.getAppPath(), 'prisma', 'prisma-client');
+
+
+/**
+ * The manifest of the prisma engines from the platform
+ */
+const prismaEngineManifest: {
+  [key in typeof process['platform']]?: string
+} = {
+  win32: 'query_engine-windows.dll.node',
+  linux: 'libquery_engine-debian-openssl-1.1.x.so.node',
+  darwin: 'libquery_engine-darwin-arm64.dylib.node'
+}
+
+
+/**
+ * Sets the prisma engine library using the envronment variable, and returns it
+ */
+export function getPrismaQueryEngineLibrary() {
+  const prismaQueryEngineLibrary = prismaEngineManifest[process.platform];
+  if (!prismaQueryEngineLibrary) {
+    throw new Error("Unsupported platform. (prisma query engine not in manifest)");
+  }
+  const prismaEngineFilepath = path.join(PRISMA_CLIENT_DIR, prismaQueryEngineLibrary);
+  return prismaEngineFilepath;
+}
+
+
+/**
+ * Sets the prisma engine library using the envronment variable, and returns it
+ */
+process.env.PRISMA_QUERY_ENGINE_LIBRARY = getPrismaQueryEngineLibrary();
 
 
 /**
@@ -34,12 +76,12 @@ const getMigrationFilepath = (migrationDirname: string) => `${getMigrationDir(mi
  */
 const isMigration = async (migrationName: string): Promise<boolean> => {
   const migrationDir = getMigrationDir(migrationName);
-  const dirStat = await fs.stat(migrationDir)
+  const dirStat = await fs.promises.stat(migrationDir)
   if (!dirStat.isDirectory()) {
     return false;
   }
   const migrationFilepath = getMigrationFilepath(migrationName);
-  const fileState = await fs.stat(migrationFilepath)
+  const fileState = await fs.promises.stat(migrationFilepath)
   const isFile = fileState.isFile();
   return isFile;
 };
@@ -50,7 +92,7 @@ const isMigration = async (migrationName: string): Promise<boolean> => {
  */
 export const getMigrations = async (): Promise<Array<string>> => {
   const migrationNames = (
-    await fs.readdir(MIGRATIONS_DIR)
+    await fs.promises.readdir(MIGRATIONS_DIR)
   ).sort();
   const migrations = new Array<string>();
   for (const migrationName of migrationNames) {
@@ -58,7 +100,7 @@ export const getMigrations = async (): Promise<Array<string>> => {
       continue;
     }
     const migrationFilepath = getMigrationFilepath(migrationName)
-    const migrationSql = await fs.readFile(migrationFilepath, "utf-8");
+    const migrationSql = await fs.promises.readFile(migrationFilepath, "utf-8");
     migrations.push(migrationSql);
   }
   return migrations;
@@ -89,6 +131,7 @@ export async function migrate(prisma: PrismaClient) {
     prisma.$executeRawUnsafe(`PRAGMA user_version = ${migrations.length};`)
   );
   await prisma.$transaction(executePromises);
+
 }
 
 
@@ -121,10 +164,8 @@ export class DatabaseConnection {
    * @param filePath The path of the database
    */
   static async open(filePath: string): Promise<DatabaseConnection> {
-    // wait 3 seconds
-    await new Promise(resolve => setTimeout(resolve, 3000));
     const prisma = new PrismaClient({
-      datasourceUrl: `file:${filePath}`
+      datasourceUrl: `file:${filePath}`,
     });
     await migrate(prisma);
     const database = new DatabaseConnection(filePath, prisma);

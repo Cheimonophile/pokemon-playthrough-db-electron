@@ -16,7 +16,8 @@
     "plugin:import/typescript"
   ],
   "ignorePatterns": [
-    "prisma/*"
+    "prisma/*",
+    "out/*"
   ],
   "parser": "@typescript-eslint/parser",
   "settings": {
@@ -31,6 +32,15 @@
     "@typescript-eslint/no-empty-object-type": 1,
     "@typescript-eslint/no-unused-expressions": 1,
     "no-empty": 1,
-    "prefer-const": 1
+    "prefer-const": 1,
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [{
+          "group": ["@prisma/*"],
+          "message": "Please use the '@prisma-client' instead."
+        }]
+      }
+    ]
   }
 }
