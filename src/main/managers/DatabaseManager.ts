@@ -1,17 +1,23 @@
 import { DatabaseConnection } from "@main/classes/DatabaseConnection";
-
+import { settings } from "@main/daos/SettingsDao";
 
 
 
 /**
  * Manages the database connection
  */
-class DatabaseManager {
+export class DatabaseManager {
+
 
   /**
    * The currently connected database
    */
   private _database: DatabaseConnection | null = null;
+
+  /**
+   * Callbacks to call when the database is opened
+   */
+  private _onOpenDatabaseCallbacks = new Set<() => void>();
 
 
   /**
@@ -31,11 +37,17 @@ class DatabaseManager {
    */
   async openDatabase(path: string) {
     this._database = await DatabaseConnection.open(path);
+    await settings.dbFilepath.set(path);
+    this._onOpenDatabaseCallbacks.forEach((callback) => callback());
   }
 
-}
 
-/**
- * The database manager of the application
- */
-export const databaseManager = new DatabaseManager();
+  /**
+   * Callback to call when the database is opened
+   * 
+   * @param callback 
+   */
+  onOpenDatabase(callback: () => void) {
+    this._onOpenDatabaseCallbacks.add(callback);
+  }
+}

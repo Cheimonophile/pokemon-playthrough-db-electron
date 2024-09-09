@@ -1,5 +1,5 @@
 import { channels } from "@common/channels";
-import { databaseManager } from "@main/managers/DatabaseManager";
+import { databaseManager } from "@main/managers";
 import { WindowManager } from "@main/managers/WindowManager";
 import { getBrowserWindowFromWebContents } from "@main/utility/electron";
 import { createDatabaseDialog, openDatabaseDialog } from "@main/utility/electron/dialog";
