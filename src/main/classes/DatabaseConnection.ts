@@ -152,7 +152,7 @@ export class DatabaseConnection {
     /**
      * The prisma client object of the database
      */
-    private readonly prisma: PrismaClient
+    public readonly prisma: PrismaClient
   ) { }
 
 

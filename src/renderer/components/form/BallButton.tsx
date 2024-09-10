@@ -28,7 +28,7 @@ export const BallButton: FC<BallButtonProps> = ({
 }) => {
   return (
     <Button
-      className="bg-ball-red text-white relative data-[hover]:after:backdrop-brightness-90 data-[active]:after:backdrop-brightness-75 after:absolute after:inset-0 rounded px-2 py-0.5"
+      className="bg-ball-red text-white relative hover:after:backdrop-brightness-90 active:after:backdrop-brightness-75 after:absolute after:inset-0 rounded px-2 py-0.5"
       onClick={onClick}>
       {text}
     </Button>
