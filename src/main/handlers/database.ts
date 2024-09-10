@@ -2,8 +2,6 @@ import { channels } from "@common/channels";
 import { databaseManager } from "@main/managers";
 import { getBrowserWindowFromWebContents } from "@main/utility/electron";
 import { createDatabaseDialog, openDatabaseDialog, openOldDatabaseDialog } from "@main/utility/electron/dialog";
-import { createFileBackup, deleteFileIfExists } from "@main/utility/fs";
-
 
 
 /**
@@ -23,8 +21,9 @@ channels.createDatabase.mainHandle(async (event) => {
   if (!filePath) {
     return;
   }
-  await deleteFileIfExists(filePath);
-  await databaseManager.openDatabase(filePath);
+  await databaseManager.createDatabase(filePath, {
+    overwrite: true
+  });
 })
 
 
@@ -39,7 +38,6 @@ channels.openDatabase.mainHandle(async (event) => {
   if (!filePath) {
     return;
   }
-  await createFileBackup(filePath);
   await databaseManager.openDatabase(filePath);
 });
 
@@ -56,7 +54,8 @@ channels.createDatabaseFromOld.mainHandle(async (event) => {
   if (!newFilePath) {
     return;
   }
-  await deleteFileIfExists(newFilePath);
-  await databaseManager.openDatabase(newFilePath);
+  await databaseManager.createDatabase(newFilePath, {
+    overwrite: true
+  });
   await databaseManager.loadOldDatabase(oldFilePath);
 });

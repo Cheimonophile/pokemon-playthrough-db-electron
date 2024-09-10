@@ -3,6 +3,7 @@ import { PrismaClient, PrismaPromise } from "@prisma/client";
 import fs from "fs";
 import { app } from "electron";
 import path from "path";
+import { createFileBackup, deleteFileIfExists } from "@main/utility/fs";
 
 /**
  * The directory of the migrations.
@@ -159,11 +160,10 @@ export class DatabaseConnection {
   /**
    * Creates a new database connection.
    * 
-   * If the database doesn't exist, creates it.
-   * 
    * @param filePath The path of the database
    */
   static async open(filePath: string): Promise<DatabaseConnection> {
+    await createFileBackup(filePath);
     const prisma = new PrismaClient({
       datasourceUrl: `file:${filePath}`,
     });
@@ -172,4 +172,33 @@ export class DatabaseConnection {
     return database
   }
 
+  /**
+   * Attempts to create a database connection.
+   * 
+   * @param filepath 
+   * @returns 
+   */
+  static async create(filepath: string): Promise<DatabaseConnection> {
+    if (fs.existsSync(filepath)) {
+      throw new Error(`Database already exists at ${filepath}`);
+    }
+    const prisma = new PrismaClient({
+      datasourceUrl: `file:${filepath}`,
+    });
+    await migrate(prisma);
+    const database = new DatabaseConnection(filepath, prisma);
+    return database
+  }
+
+  /**
+   * Deletes a database given a filepath
+   */
+  static async delete(filepath: string): Promise<void> {
+    try {
+      await deleteFileIfExists(filepath);
+    }
+    catch {
+      // do nothing because failed delete means it didn't exist
+    }
+  }
 }

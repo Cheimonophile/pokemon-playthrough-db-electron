@@ -1,4 +1,4 @@
-import { settings } from "./daos/SettingsDao";
+import { settings } from "./api/settings";
 import { DatabaseManager } from "./managers/DatabaseManager";
 import { WindowManager } from "./managers/WindowManager";
 

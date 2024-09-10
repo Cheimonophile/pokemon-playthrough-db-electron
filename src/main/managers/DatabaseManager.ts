@@ -1,5 +1,5 @@
-import { DatabaseConnection } from "@main/classes/DatabaseConnection";
-import { settings } from "@main/daos/SettingsDao";
+import { settings } from "@main/api/settings";
+import { DatabaseConnection } from "@main/domain/DatabaseConnection";
 import { PrismaClient } from "@prisma/client";
 
 
@@ -36,12 +36,30 @@ export class DatabaseManager {
    * 
    * If the database doesn't exist, creates it.
    */
-  async openDatabase(path: string) {
-    this._database = await DatabaseConnection.open(path);
-    await settings.dbFilepath.set(path);
+  async openDatabase(filepath: string) {
+    this._database = await DatabaseConnection.open(filepath);
+    await settings.dbFilepath.set(filepath);
     this._onOpenDatabaseCallbacks.forEach((callback) => callback());
   }
 
+
+  /**
+   * Create a new database connection
+   * 
+   * @param filepath 
+   */
+  async createDatabase(filepath: string, {
+    overwrite = false
+  }: {
+    overwrite?: boolean
+  } = {}) {
+    if (overwrite) {
+      await DatabaseConnection.delete(filepath);
+    }
+    this._database = await DatabaseConnection.create(filepath);
+    await settings.dbFilepath.set(filepath);
+    this._onOpenDatabaseCallbacks.forEach((callback) => callback());
+  }
 
   /**
    * Callback to call when the database is opened
