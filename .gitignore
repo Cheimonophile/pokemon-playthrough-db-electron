@@ -95,3 +95,6 @@ out/
 /prisma/*.db*
 /prisma/client
 /prisma/prisma-client
+
+# pkmndb
+*.pkmndb*

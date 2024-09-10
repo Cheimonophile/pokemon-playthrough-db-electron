@@ -37,7 +37,29 @@ export async function openDatabaseDialog(window: BrowserWindow): Promise<string 
     filters: [{ name: 'PkmnDb', extensions: ['pkmndb'] }],
     properties: [
       'openFile',
-      'createDirectory',
+      'dontAddToRecent'
+    ]
+  })
+  if (openReturn.canceled) {
+    return null;
+  }
+  return openReturn.filePaths[0] ?? null;
+}
+
+
+/**
+ * Dialog for opening an old database file
+ * 
+ * @param window 
+ * @returns 
+ */
+export async function openOldDatabaseDialog(window: BrowserWindow): Promise<string | null> {
+  const openReturn = await dialog.showOpenDialog(window, {
+    title: 'Open Old Database',
+    message: 'Open an existing pokemon playthrough database in the old format to create a new one from.',
+    buttonLabel: 'Open',
+    properties: [
+      'openFile',
       'dontAddToRecent'
     ]
   })

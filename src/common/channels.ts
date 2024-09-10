@@ -11,6 +11,7 @@ import { RendererToMainChannel, makeRendererToMainChannel } from "./interfaces/c
 export const channels = Object.freeze({
   getDatabasePath: makeRendererToMainChannel<void, string | null>("getDatabasePath"),
   createDatabase: makeRendererToMainChannel<void, void>("createDatabase"),
+  createDatabaseFromOld: makeRendererToMainChannel<void, void>("createDatabaseFromOld"),
   openDatabase: makeRendererToMainChannel<void, void>("openDatabase"),
 } satisfies {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

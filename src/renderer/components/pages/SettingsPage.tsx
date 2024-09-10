@@ -46,6 +46,19 @@ export const SettingsPage: PageFC = () => {
     }
   }, [])
 
+  /**
+   * Function to create a new database from the old database when the create database from old button is pressed
+   */
+  const handleOnClickCreateDatabaseFromOld = useCallback<MouseEventHandler<HTMLButtonElement>>(async () => {
+    try {
+      setIsLoading(true);
+      await window.channels.createDatabaseFromOld.rendererInvoke();
+    }
+    finally {
+      setIsLoading(false);
+    }
+  }, [])
+
 
   return (
     <div className="w-full h-full flex flex-col p-2 gap-2 overflow-y-auto">
@@ -57,8 +70,9 @@ export const SettingsPage: PageFC = () => {
 
         {/** Buttons */}
         <div className="flex gap-1">
-          <BallButton onClick={handleOnClickCreateDatabase} text="Create Database" />
           <BallButton onClick={handleOnClickOpenDatabase} text="Open Database" />
+          <BallButton onClick={handleOnClickCreateDatabase} text="Create Database" />
+          <BallButton onClick={handleOnClickCreateDatabaseFromOld} text="Create Database From Old" />
         </div>
 
 
