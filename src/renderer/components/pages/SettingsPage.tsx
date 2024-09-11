@@ -30,7 +30,7 @@ export const SettingsPage: PageFC = () => {
     finally {
       setIsLoading(false);
     }
-  }, [])
+  }, [setIsLoading])
 
 
   /**
@@ -44,7 +44,7 @@ export const SettingsPage: PageFC = () => {
     finally {
       setIsLoading(false);
     }
-  }, [])
+  }, [setIsLoading])
 
   /**
    * Function to create a new database from the old database when the create database from old button is pressed
@@ -57,12 +57,11 @@ export const SettingsPage: PageFC = () => {
     finally {
       setIsLoading(false);
     }
-  }, [])
+  }, [setIsLoading])
 
 
   return (
-    <div className="w-full h-full flex flex-col p-2 gap-2 overflow-y-auto">
-      <div className="text-xl">Settings</div>
+    <div className="w-full h-full flex flex-col gap-2 overflow-y-auto">
 
       {/** Database Section */}
       <div>
@@ -74,9 +73,6 @@ export const SettingsPage: PageFC = () => {
           <BallButton onClick={handleOnClickCreateDatabase} text="Create Database" />
           <BallButton onClick={handleOnClickCreateDatabaseFromOld} text="Create Database From Old" />
         </div>
-
-
-
 
 
       </div>

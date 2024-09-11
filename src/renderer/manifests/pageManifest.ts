@@ -1,13 +1,15 @@
 import { IconType } from "@renderer/components/Icon";
 import { BattlesPage } from "@renderer/components/pages/BattlesPage";
+import { LocationsPage } from "@renderer/components/pages/LocationsPage";
 import { SettingsPage } from "@renderer/components/pages/SettingsPage";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PAGES = [
-  "settings",
+  "locations",
   "battles",
+  "settings",
 ] as const satisfies string[];
 
 
@@ -29,7 +31,7 @@ export interface PageMetadata {
   /**
    * The page's component
    */
-  Component: PageFC;
+  Component?: PageFC;
 }
 
 /**
@@ -38,14 +40,19 @@ export interface PageMetadata {
 export const pageManifest: {
   [key in Page]: PageMetadata
 } = {
-  settings: {
-    label: "Settings",
-    icon: "Cog6ToothIcon",
-    Component: SettingsPage
+  locations: {
+    label: "Locations",
+    icon: "MapIcon",
+    Component: LocationsPage
   },
   battles: {
     label: "Battles",
     icon: "CircleStackIcon",
     Component: BattlesPage
-  }
+  },
+  settings: {
+    label: "Settings",
+    icon: "Cog6ToothIcon",
+    Component: SettingsPage
+  },
 }
