@@ -67,41 +67,42 @@ export function Table<T extends TableType>({
 
 
   return (
-    <div className="w-full h-full overflow-y-auto border">
-      <table className="border-collapse">
 
-        {/** table header */}
-        <thead className="sticky top-0 bg-white after:border-b after:absolute after:inset-0">
-          <tr>
+    <div id="Table" className="h-full w-full overflow-auto border">
+
+      {/** Internal Table */}
+      <div
+        className="min-w-full grid"
+        style={{
+          gridTemplateColumns: columns.map((col) => col.width ?? "minmax(min-content, 1fr)").join(" "),
+        }}>
+
+        {/** Table Header */}
+        {columns.map((col, colIndex) => (
+          <Fragment key={colIndex}>
+            <div className="border-b bg-white px-1 py-0.5 font-medium sticky top-0 text-nowrap">
+              {col.label}
+            </div>
+          </Fragment>
+        ))}
+
+
+        {/** Rows */}
+        {ids.map((id) => (
+          <Fragment key={`r-${id}`}>
+
+            {/** Cells */}
             {columns.map((col, colIndex) => (
-              <Fragment key={colIndex}>
-                <th
-                  // className={`w-[${col.width}]`}
-                  style={{ width: col.width }}
-                  key={colIndex}>
-                  {col.label}
-                </th>
+              <Fragment key={`c-${colIndex}`}>
+                <div className="px-1 py-0.5 text-nowrap truncate">
+                  {col.renderer(id)}
+                </div>
               </Fragment>
             ))}
-          </tr>
-        </thead>
+          </Fragment>
+        ))}
 
-
-        {/** Table Body */}
-        <tbody>
-          {ids.map((id) => (
-            <tr key={id}>
-              {columns.map((col, colIndex) => (
-                <Fragment key={colIndex}>
-                  <td>{col.renderer(id)}</td>
-                </Fragment>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-
-      </table>
+      </div>
     </div>
-
   )
 }

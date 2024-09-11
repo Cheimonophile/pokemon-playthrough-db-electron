@@ -43,7 +43,7 @@ export const LocationsPage: PageFC = () => {
     },
     {
       label: "Name",
-      width: "20rem",
+      // width: "20rem",
       renderer: id => {
         const location = locationsMap.get(id);
         return location?.name ?? "???";
