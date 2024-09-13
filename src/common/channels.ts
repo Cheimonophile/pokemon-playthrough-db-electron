@@ -20,10 +20,14 @@ export const channels = Object.freeze({
   openDatabase: makeRendererToMainChannel<void, void>("openDatabase"),
 
   // region channels
-  getRegions: makeRendererToMainChannel<{ nameSearch?: string }, readonly Region[]>("getRegions"),
+  getRegions: makeRendererToMainChannel<{
+    nameSearch?: string
+  }, readonly Region[]>("getRegions"),
 
   // location channels
-  getLocations: makeRendererToMainChannel<void, readonly Location[]>("getLocations"),
+  getLocations: makeRendererToMainChannel<{
+    regionId?: string
+  }, readonly Location[]>("getLocations"),
 
   // playthrough channels
   getPlaythroughs: makeRendererToMainChannel<void, readonly Playthrough[]>("getPlaythroughs"),

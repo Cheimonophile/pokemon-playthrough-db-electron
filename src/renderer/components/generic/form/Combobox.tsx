@@ -51,7 +51,7 @@ export interface SingleComboboxProps {
    * @param value 
    * @returns 
    */
-  readonly onChange: (value: string) => void;
+  readonly onChange: (value: string | null) => void;
 
   /**
    * Options for the combobox
@@ -101,24 +101,32 @@ export function SingleCombobox({
   /**
    * The actively selected label and its display value
    */
-  const displayValue = useCallback((option: ComboboxOption | null): string => {
-    return option?.label ?? "";
-  }, []);
+  const displayValue = useCallback((key: string | null): string => {
+    const displayValue = options?.find((o) => o.key === key)?.label;
+    return displayValue ?? "";
+  }, [options]);
+
+  /**
+   * Handle the change of the combobox
+   */
+  const handleOnChangeCombobox = useCallback((key: string | null) => {
+    onChange(key ?? null);
+  }, [onChange]);
 
   return (
     <Field className="flex flex-col relative">
       <Label className="block">{label}</Label>
       <Combobox
         value={value}
-        onChange={onChange}>
+        onChange={handleOnChangeCombobox}>
         <ComboboxInput
           className="px-1 py-0.5 border rounded"
           displayValue={displayValue}
           onChange={(event) => setQuery(event.target.value)}
         />
         <ComboboxOptions id="ComboboxOption" anchor="bottom start" className="border rounded overflow-y-auto empty:invisible max-w-full max-h-96 bg-white shadow">
-          {Array.from(options?.entries() ?? []).map(([key, option]) => (
-            <ComboboxOption key={key} value={option} className="relative after:absolute after:inset-0 data-[focus]:after:backdrop-brightness-90 w-full px-1 py-0.5 cursor-pointer">
+          {options?.map((option) => (
+            <ComboboxOption key={option.key} value={option.key} className="relative after:absolute after:inset-0 data-[focus]:after:backdrop-brightness-90 w-full px-1 py-0.5 cursor-pointer">
               {option.label}
             </ComboboxOption>
           ))}

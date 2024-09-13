@@ -4,15 +4,32 @@ import { useLocations } from "@renderer/hooks/data/location";
 
 
 /**
+ * Props for the locations table
+ */
+export interface LocationsTableProps {
+
+  /**
+   * Id of the region to filter by
+   */
+  regionId?: string;
+}
+
+
+
+/**
  * Make the locations table generic
  */
-export const LocationsTable: FC = () => {
+export const LocationsTable: FC<LocationsTableProps> = ({
+  regionId
+}) => {
 
 
   /**
    * Get a list of the locations
    */
-  const locations = useLocations();
+  const locations = useLocations({
+    regionId
+  });
 
   /**
    * List of the location ids

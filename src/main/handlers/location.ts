@@ -7,8 +7,12 @@ import { databaseManager } from "@main/managers";
 /**
  * Get locations from the database
  */
-channels.getLocations.mainHandle(async () => {
+channels.getLocations.mainHandle(async (event, {
+  regionId
+}) => {
   const locationDao = new LocationDao(databaseManager.getDatabase());
-  const locations = await locationDao.reads();
+  const locations = await locationDao.reads({
+    regionId
+  });
   return locations;
 });

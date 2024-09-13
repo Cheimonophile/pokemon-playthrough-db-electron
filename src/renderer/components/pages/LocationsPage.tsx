@@ -10,7 +10,7 @@ import { useCallback, useState } from "react";
  */
 export const LocationsPage: PageFC = () => {
 
-  const [region, setRegion] = useState<string | null>(null);
+  const [regionId, setRegionId] = useState<string | null>(null);
 
 
   const fetchRegionOptions = useCallback(async (query: string) => {
@@ -38,8 +38,8 @@ export const LocationsPage: PageFC = () => {
         <div className="w-96 flex flex-col gap-2">
           <SingleCombobox
             label="Region"
-            value={region}
-            onChange={setRegion}
+            value={regionId}
+            onChange={setRegionId}
             getOptions={fetchRegionOptions}
           />
         </div>
@@ -48,7 +48,9 @@ export const LocationsPage: PageFC = () => {
 
       {/** locations table */}
       <div className="flex-1 overflow-hidden">
-        <LocationsTable />
+        <LocationsTable
+          regionId={regionId ?? undefined}
+        />
       </div>
     </div>
   )
