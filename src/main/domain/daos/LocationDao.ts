@@ -17,7 +17,7 @@ export class LocationDao extends Dao {
   }: {
     regionId?: string
   }): Promise<readonly Location[]> {
-    const playthroughs: Location[] = await this.connection.prisma.location.findMany({
+    const locations = await this.connection.prisma.location.findMany({
       where: {
         AND: [
           {
@@ -28,9 +28,20 @@ export class LocationDao extends Dao {
         ]
       },
       include: {
-        region: true
+        region: true,
+        events: {
+          orderBy: {
+            no: 'desc'
+          },
+          take: 1,
+        }
       }
     });
-    return playthroughs;
+    const sortedLocations = locations.sort((locationA, locationB) => {
+      const eventANo = locationA.events[0]?.no ?? 0;
+      const eventBNo = locationB.events[0]?.no ?? 0;
+      return eventANo - eventBNo;
+    })
+    return sortedLocations;
   }
 }
