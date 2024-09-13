@@ -3,12 +3,12 @@ import { FC } from "react";
 
 
 export interface GFieldProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   /**
    * Label for the field
    */
-  label?: string;
+  label: string | undefined;
 }
 
 
@@ -20,7 +20,7 @@ export const GField: FC<GFieldProps> = ({
 
 
   return (
-    <Field className="flex flex-col relative">
+    <Field className="flex flex-col relative text-sm">
       {label && <Label className="block">{label}</Label>}
       {children}
     </Field>

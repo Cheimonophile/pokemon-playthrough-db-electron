@@ -1,7 +1,8 @@
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { LocationsTable } from "../tables/LocationsTable";
 import { useState } from "react";
-import { RegionCombobox } from "../form/field/combobox/RegionCombobox";
+import { RegionCombobox } from "../form/field/comboboxes/RegionCombobox";
+import { TextInput } from "../form/field/inputs/TextInput";
 
 
 
@@ -10,8 +11,9 @@ import { RegionCombobox } from "../form/field/combobox/RegionCombobox";
  */
 export const LocationsPage: PageFC = () => {
 
-  // id of the region
+  // field state
   const [regionId, setRegionId] = useState<string | null>(null);
+  const [newLocationName, setNewLocationName] = useState<string | null>(null);
 
 
   return (
@@ -22,13 +24,28 @@ export const LocationsPage: PageFC = () => {
 
 
         {/** Input Box */}
-        <div className="w-96 flex flex-col gap-2">
+        <div className="w-96 flex flex-col gap-0.5">
 
-          {/** Region Combobox */}
-          <RegionCombobox
-            regionId={regionId}
-            onChange={setRegionId}
-          />
+          {/** Location and Region */}
+          <div className="flex flex-row gap-1">
+
+            {/** Region Combobox */}
+            <div className="w-24">
+              <RegionCombobox
+                regionId={regionId}
+                onChange={setRegionId}
+              />
+            </div>
+
+            {/** Location Name */}
+            <div className="flex-1">
+              <TextInput
+                label="Location Name"
+                value={newLocationName}
+                onChange={setNewLocationName}
+              />
+            </div>
+          </div>
         </div>
       </div>
 

@@ -23,7 +23,9 @@ export interface RegionComboboxProps {
 
 
 
-
+/**
+ * Combobox to select a region
+ */
 export function RegionCombobox({
   regionId,
   onChange
