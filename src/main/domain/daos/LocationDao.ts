@@ -30,6 +30,9 @@ export class LocationDao extends Dao {
       include: {
         region: true,
         events: {
+          select: {
+            no: true
+          },
           orderBy: {
             no: 'desc'
           },

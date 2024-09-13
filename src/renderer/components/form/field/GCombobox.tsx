@@ -1,6 +1,7 @@
-import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Field, Label } from "@headlessui/react";
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from "@headlessui/react";
 import { useData } from "@renderer/hooks/useData";
 import { ReactNode, useCallback, useState } from "react";
+import { GField } from "../GField";
 
 
 
@@ -114,8 +115,7 @@ export function SingleGCombobox({
   }, [onChange]);
 
   return (
-    <Field className="flex flex-col relative">
-      <Label className="block">{label}</Label>
+    <GField label={label}>
       <Combobox
         value={value}
         onChange={handleOnChangeCombobox}>
@@ -132,6 +132,6 @@ export function SingleGCombobox({
           ))}
         </ComboboxOptions>
       </Combobox>
-    </Field>
+    </GField>
   );
 }
