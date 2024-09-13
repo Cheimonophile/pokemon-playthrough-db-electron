@@ -1,22 +1,12 @@
 import { Playthrough } from "@common/interfaces/models/Playthrough";
-import { DatabaseConnection } from "../DatabaseConnection";
+import { Dao } from "@main/interfaces/Dao";
 
 
 
 /**
  * Dao for accessing playthroughs
  */
-export class PlaythroughDao {
-
-
-  constructor(
-
-    /**
-     * Internal connection to the database to access playthroughs
-     */
-    private readonly connection: DatabaseConnection
-  ) { }
-
+export class PlaythroughDao extends Dao {
 
 
   /**

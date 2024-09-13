@@ -2,5 +2,6 @@
 import './handlers/database';
 
 // data handlers
+import './handlers/region';
 import './handlers/location';
 import './handlers/playthrough';

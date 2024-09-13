@@ -1,17 +1,11 @@
-import { DatabaseConnection } from "../DatabaseConnection";
+import { Dao } from "@main/interfaces/Dao";
 import { Location } from "@common/interfaces/models/Location";
 
 
-export class LocationDao {
+export class LocationDao extends Dao {
 
 
-  constructor(
 
-    /**
-     * Internal connection to the database to access playthroughs
-     */
-    private readonly connection: DatabaseConnection
-  ) { }
 
 
 

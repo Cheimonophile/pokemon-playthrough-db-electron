@@ -2,6 +2,7 @@ import { makeMainToRendererChannel } from "./interfaces/channels/MainToRendererC
 import { RendererToMainChannel, makeRendererToMainChannel } from "./interfaces/channels/RendererToMainChannel";
 import { Location } from "./interfaces/models/Location";
 import { Playthrough } from "./interfaces/models/Playthrough";
+import { Region } from "./interfaces/models/Region";
 
 /**
  * Channels available to the application
@@ -17,6 +18,9 @@ export const channels = Object.freeze({
   createDatabase: makeRendererToMainChannel<void, void>("createDatabase"),
   createDatabaseFromOld: makeRendererToMainChannel<void, void>("createDatabaseFromOld"),
   openDatabase: makeRendererToMainChannel<void, void>("openDatabase"),
+
+  // region channels
+  getRegions: makeRendererToMainChannel<{ nameSearch?: string }, readonly Region[]>("getRegions"),
 
   // location channels
   getLocations: makeRendererToMainChannel<void, readonly Location[]>("getLocations"),

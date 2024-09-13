@@ -18,14 +18,21 @@ export interface GetDataCallback<T> {
  * @returns 
  */
 export function useData<T>(callback: GetDataCallback<T>) {
-  const [data, setData] = useState<T | undefined>(undefined);
+  const [data, setData] = useState<T | null | undefined>(undefined);
 
   /**
    * Fetches the data from the main process
    */
   const getData = useCallback(async () => {
-    const data = await callback();
-    setData(data);
+    try {
+      const data = await callback();
+      setData(data);
+    }
+    catch (caught) {
+      console.error(caught)
+      setData(null);
+    }
+
   }, [callback]);
 
   /**
