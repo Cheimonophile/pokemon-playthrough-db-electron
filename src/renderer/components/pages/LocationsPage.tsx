@@ -1,7 +1,7 @@
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { LocationsTable } from "../tables/LocationsTable";
-import { ComboboxOption, SingleCombobox } from "../generic/form/Combobox";
-import { useCallback, useState } from "react";
+import { useState } from "react";
+import { RegionCombobox } from "../form/field/combobox/RegionCombobox";
 
 
 
@@ -10,21 +10,8 @@ import { useCallback, useState } from "react";
  */
 export const LocationsPage: PageFC = () => {
 
+  // id of the region
   const [regionId, setRegionId] = useState<string | null>(null);
-
-
-  const fetchRegionOptions = useCallback(async (query: string) => {
-    const regions = await window.channels.getRegions.rendererInvoke({
-      nameSearch: query
-    });
-    const options = regions.map<ComboboxOption>(region => {
-      return {
-        label: region.name,
-        key: region.id
-      } satisfies ComboboxOption;
-    });
-    return options;
-  }, [])
 
 
   return (
@@ -36,14 +23,13 @@ export const LocationsPage: PageFC = () => {
 
         {/** Input Box */}
         <div className="w-96 flex flex-col gap-2">
-          <SingleCombobox
-            label="Region"
-            value={regionId}
+
+          {/** Region Combobox */}
+          <RegionCombobox
+            regionId={regionId}
             onChange={setRegionId}
-            getOptions={fetchRegionOptions}
           />
         </div>
-
       </div>
 
       {/** locations table */}

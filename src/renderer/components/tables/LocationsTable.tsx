@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react"
-import { Table, TableColumn } from "../generic/Table"
+import { Table, TableColumn } from "../Table"
 import { useLocations } from "@renderer/hooks/data/location";
 
 

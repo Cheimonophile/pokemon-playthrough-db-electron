@@ -24,7 +24,7 @@ export interface ComboboxOption {
 /**
  * Callback function to load the combobox options
  */
-export interface LoadOptions {
+export interface LoadComboboxOptions {
   (query: string): Promise<readonly ComboboxOption[]>;
 }
 
@@ -32,7 +32,7 @@ export interface LoadOptions {
 /**
  * Props for SingleCombobox
  */
-export interface SingleComboboxProps {
+export interface SingleGComboboxProps {
 
   /**
    * Label for the combobox
@@ -58,7 +58,7 @@ export interface SingleComboboxProps {
    * 
    * MUST BE IN USE CALLBACK
    */
-  readonly getOptions: LoadOptions;
+  readonly getOptions: LoadComboboxOptions;
 
   /**
    * Watched changes in the query
@@ -77,12 +77,12 @@ export interface SingleComboboxProps {
  * @param props 
  * @returns 
  */
-export function SingleCombobox({
+export function SingleGCombobox({
   label,
   getOptions,
   value,
   onChange,
-}: SingleComboboxProps): ReactNode {
+}: SingleGComboboxProps): ReactNode {
   const [query, setQuery] = useState<string>("");
 
   /**

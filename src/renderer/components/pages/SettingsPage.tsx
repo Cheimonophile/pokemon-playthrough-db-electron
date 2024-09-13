@@ -1,7 +1,7 @@
 import { useDatabase } from "@renderer/hooks/data/useDatabase";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { MouseEventHandler, useCallback } from "react";
-import { BallButton } from "../generic/form/BallButton";
+import { BallButton } from "../form/GButton";
 import { useAppContext } from "@renderer/app";
 
 
