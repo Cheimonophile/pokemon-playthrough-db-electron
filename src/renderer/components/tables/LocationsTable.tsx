@@ -2,6 +2,7 @@ import { FC, useMemo } from "react"
 import { GTable, GTableColumn } from "../GTable"
 import { useLocations } from "@renderer/hooks/data/location";
 import { DeleteLocationButton } from "../form/buttons/location/DeleteLocationButton";
+import { Location } from '@common/interfaces/models/Location'
 
 
 /**
@@ -33,55 +34,35 @@ export const LocationsTable: FC<LocationsTableProps> = ({
   });
 
   /**
-   * List of the location ids
-   */
-  const locationIds = useMemo(() => {
-    return locations?.map(location => location.id).reverse() ?? []
-  }, [locations])
-
-  /**
-   * Map of the locations
-   */
-  const locationsMap = useMemo(() => {
-    return new Map(locations?.map(location => [location.id, location]) ?? []);
-  }, [locations])
-
-  /**
    * Columns for the locations table
    */
-  const columns = useMemo<GTableColumn<string>[]>(() => [
+  const columns = useMemo<GTableColumn<Location>[]>(() => [
     {
       label: "",
       width: "3rem",
-      renderer: id => (
+      renderer: location => (
         <DeleteLocationButton
           text="X"
-          locationId={id}
+          locationId={location.id}
         />
       )
     },
     {
       label: "Region",
       width: "5rem",
-      renderer: id => {
-        const location = locationsMap.get(id);
-        return location?.region.name ?? "???";
-      }
+      renderer: location => location.region.name
     },
     {
       label: "Name",
       width: "20rem",
-      renderer: id => {
-        const location = locationsMap.get(id);
-        return location?.name ?? "???";
-      }
+      renderer: location => location.name
     },
-  ], [locationsMap])
+  ], [])
 
 
   return (
     <GTable
-      ids={locationIds}
+      values={locations}
       columns={columns}
     />
   )

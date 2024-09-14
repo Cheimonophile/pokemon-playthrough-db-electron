@@ -1,20 +1,16 @@
 import { Fragment, ReactNode, useMemo } from "react";
-
-/**
- * Type that the id type of the table must extend
- */
-type TableType = string | number;
+import { DataConsumer } from "./DataConsumer";
 
 /**
  * Function Component for the table column renderer
  */
-export type GTableCellRenderer<T extends TableType> = (id: T) => ReactNode;
+export type GTableCellRenderer<T> = (id: T) => ReactNode;
 
 
 /**
  * Type for a table column
  */
-export interface GTableColumn<T extends TableType> {
+export interface GTableColumn<T> {
 
 
   /**
@@ -39,12 +35,12 @@ export interface GTableColumn<T extends TableType> {
 /**
  * Props for the table component
  */
-export interface GTableProps<T extends TableType> {
+export interface GTableProps<T> {
 
   /**
    * The data for the table
    */
-  readonly ids: T[];
+  readonly values: readonly T[] | null | undefined;
 
 
   /**
@@ -58,8 +54,8 @@ export interface GTableProps<T extends TableType> {
 /**
  * Component for a table in the application
  */
-export function GTable<T extends TableType>({
-  ids,
+export function GTable<T>({
+  values,
   columns
 }: GTableProps<T>) {
 
@@ -80,40 +76,46 @@ export function GTable<T extends TableType>({
 
   return (
     <div id="Table" className="h-full w-full overflow-auto border">
-
-      {/** Internal Table */}
-      <div
-        className="min-w-full grid"
-        style={{
-          gridTemplateColumns: _columns.map((col) => col.width ?? "minmax(min-content, 1fr)").join(" "),
-        }}>
-
-        {/** Table Header */}
-        {_columns.map((col, colIndex) => (
-          <Fragment key={colIndex}>
-            <div className="border-b bg-white px-1 py-0.5 font-medium sticky top-0 text-nowrap z-10">
-              {col.label}
-            </div>
-          </Fragment>
-        ))}
+      <DataConsumer value={values}>
+        {values => (<>
 
 
-        {/** Rows */}
-        {ids.map((id) => (
-          <Fragment key={`r-${id}`}>
+          {/** Internal Table */}
+          <div
+            className="min-w-full grid"
+            style={{
+              gridTemplateColumns: _columns.map((col) => col.width ?? "minmax(min-content, 1fr)").join(" "),
+            }}>
 
-            {/** Cells */}
+            {/** Table Header */}
             {_columns.map((col, colIndex) => (
-              <Fragment key={`c-${colIndex}`}>
-                <div className="px-1 py-0.5 text-nowrap truncate">
-                  {col.renderer(id)}
+              <Fragment key={colIndex}>
+                <div className="border-b bg-white px-1 py-0.5 font-medium sticky top-0 text-nowrap z-10">
+                  {col.label}
                 </div>
               </Fragment>
             ))}
-          </Fragment>
-        ))}
 
-      </div>
+
+            {/** Rows */}
+            {values.map((id) => (
+              <Fragment key={`r-${id}`}>
+
+                {/** Cells */}
+                {_columns.map((col, colIndex) => (
+                  <Fragment key={`c-${colIndex}`}>
+                    <div className="px-1 py-0.5 text-nowrap truncate">
+                      {col.renderer(id)}
+                    </div>
+                  </Fragment>
+                ))}
+              </Fragment>
+            ))}
+
+          </div>
+
+        </>)}
+      </DataConsumer>
     </div>
   )
 }
