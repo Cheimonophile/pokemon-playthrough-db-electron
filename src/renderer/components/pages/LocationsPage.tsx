@@ -1,10 +1,9 @@
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { LocationsTable } from "../tables/LocationsTable";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { RegionCombobox } from "../form/field/comboboxes/RegionCombobox";
 import { TextInput } from "../form/field/inputs/TextInput";
-import { GButton } from "../form/GButton";
-import { useAppContext } from "@renderer/app";
+import { CreateLocationButton } from "../form/buttons/CreateLocationButton";
 
 
 
@@ -13,41 +12,9 @@ import { useAppContext } from "@renderer/app";
  */
 export const LocationsPage: PageFC = () => {
 
-  // context
-  const {
-    setIsLoading
-  } = useAppContext();
-
   // field state
   const [regionId, setRegionId] = useState<string | null>(null);
   const [newLocationName, setNewLocationName] = useState<string | null>(null);
-
-  /**
-   * Create a new location
-   */
-  const handleOnClickCreateLocation = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      if (!regionId || !newLocationName) return;
-      await window.channels.createLocation.rendererInvoke({
-        regionId,
-        name: newLocationName
-      });
-      setNewLocationName(null);
-    }
-    finally {
-      setIsLoading(false);
-    }
-  }, [
-    regionId,
-    newLocationName,
-    setIsLoading
-  ]);
-
-  /**
-   * Whether the create location button is disabled
-   */
-  const createLocationButtonDisabled = !regionId || !newLocationName;
 
 
   return (
@@ -55,7 +22,6 @@ export const LocationsPage: PageFC = () => {
 
       {/** Above Table */}
       <div>
-
 
         {/** Input Box */}
         <div className="w-96 flex flex-col gap-0.5">
@@ -83,10 +49,9 @@ export const LocationsPage: PageFC = () => {
 
 
           {/** Create Location Button */}
-          <GButton
-            text="Create Location"
-            onClick={handleOnClickCreateLocation}
-            disabled={createLocationButtonDisabled}
+          <CreateLocationButton
+            regionId={regionId}
+            name={newLocationName}
           />
         </div>
       </div>
