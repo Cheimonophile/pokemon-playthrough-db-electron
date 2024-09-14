@@ -1,7 +1,38 @@
 import { channels } from "@common/channels";
 import { LocationDao } from "@main/domain/daos/LocationDao";
+import { RegionDao } from "@main/domain/daos/RegionDao";
 import { databaseManager } from "@main/managers";
+import { WindowManager } from "@main/managers/WindowManager";
+import { getBrowserWindowFromWebContents } from "@main/utility/electron";
+import { openConfirmDialog } from "@main/utility/electron/dialog";
 
+
+
+/**
+ * Create a location in the database
+ */
+channels.createLocation.mainHandle(async (event, {
+  regionId,
+  name
+}) => {
+  const window = getBrowserWindowFromWebContents(event.sender);
+  const regionDao = new RegionDao(databaseManager.getDatabase());
+  const region = await regionDao.read(regionId)
+  if (!region) {
+    throw new Error(`Region '${regionId}' not found`);
+  }
+  const confirmed = await openConfirmDialog(window, `Create location ${name} in ${region.name}?`);
+  if (!confirmed) {
+    return null;
+  }
+  const locationDao = new LocationDao(databaseManager.getDatabase());
+  const location = await locationDao.create({
+    regionId,
+    name
+  });
+  WindowManager.notify();
+  return location;
+});
 
 
 /**

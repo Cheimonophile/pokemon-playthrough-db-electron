@@ -6,6 +6,27 @@ export class LocationDao extends Dao {
 
 
 
+  /**
+   * Create a location in the database
+   */
+  async create({
+    regionId,
+    name
+  }: {
+    regionId: string,
+    name: string
+  }): Promise<Location> {
+    const location = await this.connection.prisma.location.create({
+      data: {
+        name,
+        regionId
+      },
+      include: {
+        region: true,
+      }
+    });
+    return location;
+  }
 
 
 

@@ -25,6 +25,10 @@ export const channels = Object.freeze({
   }, readonly Region[]>("getRegions"),
 
   // location channels
+  createLocation: makeRendererToMainChannel<{
+    regionId: string,
+    name: string
+  }, Location | null>("createLocation"),
   getLocations: makeRendererToMainChannel<{
     regionId?: string
   }, readonly Location[]>("getLocations"),

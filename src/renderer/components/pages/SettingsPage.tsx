@@ -1,7 +1,7 @@
 import { useDatabase } from "@renderer/hooks/data/useDatabase";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { MouseEventHandler, useCallback } from "react";
-import { BallButton } from "../form/GButton";
+import { GButton } from "../form/GButton";
 import { useAppContext } from "@renderer/app";
 
 
@@ -69,9 +69,9 @@ export const SettingsPage: PageFC = () => {
 
         {/** Buttons */}
         <div className="flex gap-1">
-          <BallButton onClick={handleOnClickOpenDatabase} text="Open Database" />
-          <BallButton onClick={handleOnClickCreateDatabase} text="Create Database" />
-          <BallButton onClick={handleOnClickCreateDatabaseFromOld} text="Create Database From Old" />
+          <GButton onClick={handleOnClickOpenDatabase} text="Open Database" />
+          <GButton onClick={handleOnClickCreateDatabase} text="Create Database" />
+          <GButton onClick={handleOnClickCreateDatabaseFromOld} text="Create Database From Old" />
         </div>
 
 

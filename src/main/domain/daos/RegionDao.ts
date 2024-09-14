@@ -7,6 +7,23 @@ import { Dao } from "@main/interfaces/Dao";
 export class RegionDao extends Dao {
 
 
+
+  /**
+   * Read a region from the database
+   * 
+   * @param regionId 
+   * @returns 
+   */
+  async read(regionId: string): Promise<Region | null> {
+    const region: Region | null = await this.connection.prisma.region.findUnique({
+      where: {
+        id: regionId
+      }
+    });
+    return region;
+  }
+
+
   /**
    * Read regions from the database
    */
