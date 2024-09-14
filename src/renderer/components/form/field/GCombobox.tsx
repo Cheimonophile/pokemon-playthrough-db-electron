@@ -124,7 +124,7 @@ export function SingleGCombobox({
           displayValue={displayValue}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <ComboboxOptions id="ComboboxOption" anchor="bottom start" className="border rounded overflow-y-auto empty:invisible max-w-full max-h-96 bg-white shadow">
+        <ComboboxOptions id="ComboboxOption" anchor="bottom start" className="border rounded overflow-y-auto empty:invisible max-w-full max-h-96 bg-white shadow z-20">
           {options?.map((option) => (
             <ComboboxOption key={option.key} value={option.key} className="relative after:absolute after:inset-0 data-[focus]:after:backdrop-brightness-90 w-full px-1 py-0.5 cursor-pointer">
               {option.label}

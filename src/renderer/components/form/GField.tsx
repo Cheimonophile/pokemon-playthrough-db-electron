@@ -12,7 +12,11 @@ export interface GFieldProps {
 }
 
 
-
+/**
+ * Field parameter for the form
+ * 
+ * @returns 
+ */
 export const GField: FC<GFieldProps> = ({
   children,
   label
@@ -20,8 +24,8 @@ export const GField: FC<GFieldProps> = ({
 
 
   return (
-    <Field className="flex flex-col relative">
-      {label && <Label className="block text-sm">{label}</Label>}
+    <Field className="flex flex-col relative text-sm">
+      {label && <Label className="block font-bold">{label}</Label>}
       {children}
     </Field>
   )

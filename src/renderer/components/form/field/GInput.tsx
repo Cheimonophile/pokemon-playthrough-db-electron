@@ -1,6 +1,7 @@
 import { Input } from "@headlessui/react";
 import { GField } from "../GField";
 import { ComponentProps } from "react";
+import { clsx } from "clsx";
 
 /**
  * Props for GInput
@@ -30,6 +31,12 @@ export interface GInputProps {
    * @returns 
    */
   onChange: ComponentProps<'input'>['onChange'];
+
+
+  /**
+   * Width of the input
+   */
+  width?: `${number}rem`;
 }
 
 
@@ -40,12 +47,16 @@ export function GInput({
   label,
   type,
   value,
-  onChange
+  onChange,
+  width
 }: GInputProps) {
   return (
     <GField label={label}>
       <Input
-        className="border rounded px-1 py-0.25"
+        className={clsx(
+          " border rounded px-1 py-0.25"
+        )}
+        style={{ width }}
         type={type}
         value={value}
         onChange={onChange}
