@@ -36,7 +36,7 @@ export const GButton: FC<GButtonProps> = ({
   return (
     <Button
       className={clsx(
-        "bg-ball-red text-white relative rounded px-2 py-0.5",
+        "bg-ball-red text-white relative rounded px-2 py-0.25",
         disabled
           ? "bg-gray-400 cursor-not-allowed"
           : "hover:after:backdrop-brightness-90 active:after:backdrop-brightness-75 after:absolute after:inset-0"

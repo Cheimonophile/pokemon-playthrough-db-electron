@@ -45,7 +45,7 @@ export function GInput({
   return (
     <GField label={label}>
       <Input
-        className="border rounded px-1 py-0.5"
+        className="border rounded px-1 py-0.25"
         type={type}
         value={value}
         onChange={onChange}

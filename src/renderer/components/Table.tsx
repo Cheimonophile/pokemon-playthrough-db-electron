@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, useMemo } from "react";
 
 /**
  * Type that the id type of the table must extend
@@ -50,7 +50,7 @@ export interface TableProps<T extends TableType> {
   /**
    * The columns for the table
    */
-  readonly columns: TableColumn<T>[];
+  readonly columns: readonly TableColumn<T>[];
 }
 
 
@@ -64,6 +64,18 @@ export function Table<T extends TableType>({
 }: TableProps<T>) {
 
 
+  /**
+   * Internal columns
+   * 
+   * Adds an empty column with flex to fill the table
+   */
+  const _columns = useMemo(() => [
+    ...columns,
+    {
+      label: "",
+      renderer: () => null,
+    }
+  ], [columns]);
 
 
   return (
@@ -74,11 +86,11 @@ export function Table<T extends TableType>({
       <div
         className="min-w-full grid"
         style={{
-          gridTemplateColumns: columns.map((col) => col.width ?? "minmax(min-content, 1fr)").join(" "),
+          gridTemplateColumns: _columns.map((col) => col.width ?? "minmax(min-content, 1fr)").join(" "),
         }}>
 
         {/** Table Header */}
-        {columns.map((col, colIndex) => (
+        {_columns.map((col, colIndex) => (
           <Fragment key={colIndex}>
             <div className="border-b bg-white px-1 py-0.5 font-medium sticky top-0 text-nowrap z-10">
               {col.label}
@@ -92,7 +104,7 @@ export function Table<T extends TableType>({
           <Fragment key={`r-${id}`}>
 
             {/** Cells */}
-            {columns.map((col, colIndex) => (
+            {_columns.map((col, colIndex) => (
               <Fragment key={`c-${colIndex}`}>
                 <div className="px-1 py-0.5 text-nowrap truncate">
                   {col.renderer(id)}

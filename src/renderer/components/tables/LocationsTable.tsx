@@ -70,7 +70,7 @@ export const LocationsTable: FC<LocationsTableProps> = ({
     },
     {
       label: "Name",
-      // width: "20rem",
+      width: "20rem",
       renderer: id => {
         const location = locationsMap.get(id);
         return location?.name ?? "???";

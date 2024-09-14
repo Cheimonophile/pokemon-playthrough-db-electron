@@ -20,8 +20,8 @@ export const GField: FC<GFieldProps> = ({
 
 
   return (
-    <Field className="flex flex-col relative text-sm">
-      {label && <Label className="block">{label}</Label>}
+    <Field className="flex flex-col relative">
+      {label && <Label className="block text-sm">{label}</Label>}
       {children}
     </Field>
   )
