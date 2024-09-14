@@ -1,9 +1,10 @@
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { useState } from "react";
-import { NumberInput } from "../form/field/inputs/NumberInput";
 import { Type1Combobox } from "../form/field/comboboxes/typeComboboxes/Type1Combobox";
 import { Type2Combobox } from "../form/field/comboboxes/typeComboboxes/Type2Combobox";
 import { TextInput } from "../form/field/inputs/TextInput";
+import { GenerationInput } from "../form/field/inputs/numberInputs/GenerationInput";
+import { DexNoInput } from "../form/field/inputs/numberInputs/DexNoInput";
 
 
 
@@ -31,8 +32,8 @@ export const SpeciesPage: PageFC = () => {
 
           {/** Inputs */}
           <div className="flex flex-row gap-2">
-            <NumberInput label="Generation" value={generation} onChange={setGeneration} width="6rem" />
-            <NumberInput label="Dex No" value={dexNo} onChange={setDexNo} width="5rem" />
+            <GenerationInput generation={generation} onChange={setGeneration} label />
+            <DexNoInput dexNo={dexNo} onChange={setDexNo} label />
           </div>
 
 
