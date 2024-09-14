@@ -5,7 +5,9 @@ import { Dao } from "@main/interfaces/Dao";
 
 
 
-
+/**
+ * Data access object for species
+ */
 export class SpeciesDao extends Dao {
 
 
@@ -45,6 +47,23 @@ export class SpeciesDao extends Dao {
         type1: true,
         type2: true,
       },
+    });
+    return species;
+  }
+
+
+  /**
+   * Get a list of the species
+   */
+  async reads(): Promise<readonly Species[]> {
+    const species = await this.connection.prisma.species.findMany({
+      include: {
+        type1: true,
+        type2: true,
+      },
+      orderBy: {
+        dexNo: "desc",
+      }
     });
     return species;
   }

@@ -41,6 +41,7 @@ export const channels = Object.freeze({
     name: string,
     form: string | null
   }, Species | null>("createSpecies"),
+  getSpecies: makeRendererToMainChannel<void, readonly Species[]>("getSpecies"),
 
   // location channels
   createLocation: makeRendererToMainChannel<{

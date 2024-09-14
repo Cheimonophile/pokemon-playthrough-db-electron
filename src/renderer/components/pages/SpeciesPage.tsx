@@ -6,6 +6,7 @@ import { TextInput } from "../form/field/inputs/TextInput";
 import { GenerationInput } from "../form/field/inputs/numberInputs/GenerationInput";
 import { DexNoInput } from "../form/field/inputs/numberInputs/DexNoInput";
 import { CreateSpeciesButton } from "../form/buttons/species/CreateSpeciesButton";
+import { SpeciesTable } from "../tables/SpeciesTable";
 
 
 
@@ -73,16 +74,14 @@ export const SpeciesPage: PageFC = () => {
               setNewSpeciesForm(null);
             }}
           />}
-
-
         </div>
-
       </div>
 
 
 
       {/** Species Table */}
-      <div className="flex-1">
+      <div className="flex-1 overflow-hidden">
+        <SpeciesTable />
       </div>
 
     </div>

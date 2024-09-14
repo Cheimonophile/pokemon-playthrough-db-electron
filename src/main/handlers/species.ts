@@ -35,3 +35,14 @@ channels.createSpecies.mainHandle(async (event, {
   });
   return species;
 });
+
+
+
+/**
+ * Get the species
+ */
+channels.getSpecies.mainHandle(async () => {
+  const speciesDao = new SpeciesDao(databaseManager.getDatabase());
+  const species = await speciesDao.reads();
+  return species; 
+});

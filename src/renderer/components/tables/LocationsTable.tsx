@@ -1,8 +1,8 @@
 import { FC, useMemo } from "react"
 import { GTable, GTableColumn } from "../GTable"
-import { useLocations } from "@renderer/hooks/data/location";
 import { DeleteLocationButton } from "../form/buttons/location/DeleteLocationButton";
 import { Location } from '@common/interfaces/models/Location'
+import { useLocations } from "@renderer/hooks/data/locationHooks";
 
 
 /**

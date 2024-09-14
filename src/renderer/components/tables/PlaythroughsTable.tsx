@@ -1,7 +1,7 @@
-import { usePlaythroughs } from "@renderer/hooks/data/playthrough";
 import { FC, useMemo } from "react";
 import { GTable, GTableColumn } from "../GTable";
 import { Playthrough } from "@common/interfaces/models/Playthrough";
+import { usePlaythroughs } from "@renderer/hooks/data/playthroughHooks";
 
 
 
