@@ -25,6 +25,11 @@ export interface GInputProps {
   value: string;
 
   /**
+   * If the input is invalid
+   */
+  invalid: boolean;
+
+  /**
    * When the value changes
    * 
    * @param value 
@@ -37,6 +42,9 @@ export interface GInputProps {
    * Width of the input
    */
   width?: `${number}rem`;
+
+
+
 }
 
 
@@ -48,10 +56,13 @@ export function GInput({
   type,
   value,
   onChange,
-  width
+  width,
+  invalid
 }: GInputProps) {
   return (
-    <GField label={label}>
+    <GField
+      label={label}
+      invalid={invalid}>
       <Input
         className={clsx(
           " border rounded px-1 py-0.25"

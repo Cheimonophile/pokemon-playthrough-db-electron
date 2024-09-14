@@ -40,6 +40,11 @@ export interface SingleGComboboxProps {
    */
   readonly label?: string;
 
+  /**
+   * Width of the combobox
+   */
+  readonly width?: `${number}rem`;
+
 
   /**
    * The current value of the combobox
@@ -68,6 +73,11 @@ export interface SingleGComboboxProps {
    * @returns 
    */
   readonly onChangeQuery?: (query: string) => void;
+
+  /**
+   * If the combobox is invalid
+   */
+  readonly invalid: boolean;
 }
 
 
@@ -83,6 +93,8 @@ export function SingleGCombobox({
   getOptions,
   value,
   onChange,
+  width,
+  invalid
 }: SingleGComboboxProps): ReactNode {
   const [query, setQuery] = useState<string>("");
 
@@ -115,12 +127,15 @@ export function SingleGCombobox({
   }, [onChange]);
 
   return (
-    <GField label={label}>
+    <GField
+      label={label}
+      invalid={invalid}>
       <Combobox
         value={value}
         onChange={handleOnChangeCombobox}>
         <ComboboxInput
           className="px-1 py-0.5 border rounded"
+          style={{ width }}
           displayValue={displayValue}
           onChange={(event) => setQuery(event.target.value)}
         />

@@ -8,9 +8,20 @@ import { ComboboxOption, SingleGCombobox } from "../GCombobox";
 export interface TypeComboboxProps {
 
   /**
+   * The label for the type combobox
+   */
+  readonly label?: string | true
+
+  /**
    * The id of the currently selected type
    */
-  typeId: string | null;
+  readonly typeId: string | null;
+
+
+  /**
+   * Whether the type is invalid
+   */
+  readonly invalid: boolean;
 
 
   /**
@@ -20,10 +31,7 @@ export interface TypeComboboxProps {
   onChange(typeId: string | null): void;
 
 
-  /**
-   * Is it the first or second type
-   */
-  typeNumber: 1 | 2 | undefined;
+
 
 }
 
@@ -36,7 +44,8 @@ export interface TypeComboboxProps {
 export function TypeCombobox({
   typeId,
   onChange,
-  typeNumber
+  label,
+  invalid
 }: TypeComboboxProps) {
 
   /**
@@ -57,7 +66,9 @@ export function TypeCombobox({
 
   return (
     <SingleGCombobox
-      label={`Type ${typeNumber}`}
+      invalid={invalid}
+      label={label === true ? "Type" : label}
+      width="5rem"
       value={typeId}
       onChange={onChange}
       getOptions={getTypeOptions}

@@ -14,6 +14,11 @@ export interface RegionComboboxProps {
    */
   regionId: string | null;
 
+  /**
+   * Whether the region is invalid
+   */
+  invalid?: boolean;
+
 
   /**
    * When the region id changes
@@ -28,7 +33,8 @@ export interface RegionComboboxProps {
  */
 export function RegionCombobox({
   regionId,
-  onChange
+  onChange,
+  invalid = false
 }: RegionComboboxProps) {
 
   /**
@@ -51,6 +57,7 @@ export function RegionCombobox({
   return (
     <SingleGCombobox
       label="Region"
+      invalid={invalid}
       value={regionId}
       onChange={onChange}
       getOptions={getRegionOptions}

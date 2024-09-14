@@ -1,7 +1,9 @@
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 import { useState } from "react";
-import { TypeCombobox } from "../form/field/comboboxes/TypeCombobox";
 import { NumberInput } from "../form/field/inputs/NumberInput";
+import { Type1Combobox } from "../form/field/comboboxes/typeComboboxes/Type1Combobox";
+import { Type2Combobox } from "../form/field/comboboxes/typeComboboxes/Type2Combobox";
+import { TextInput } from "../form/field/inputs/TextInput";
 
 
 
@@ -13,6 +15,8 @@ export const SpeciesPage: PageFC = () => {
   const [dexNo, setDexNo] = useState<number | null>(null);
   const [type1Id, setType1Id] = useState<string | null>(null);
   const [type2Id, setType2Id] = useState<string | null>(null);
+  const [newSpeciesName, setNewSpeciesName] = useState<string | null>(null);
+  const [newSpeciesForm, setNewSpeciesForm] = useState<string | null>(null);
 
 
   return (
@@ -23,7 +27,7 @@ export const SpeciesPage: PageFC = () => {
 
 
         {/** Inputs */}
-        <div className="flex flex-col w-96 overflow-hidden">
+        <div className="flex flex-col w-52 overflow-auto">
 
           {/** Inputs */}
           <div className="flex flex-row gap-2">
@@ -34,9 +38,22 @@ export const SpeciesPage: PageFC = () => {
 
           {/** Types */}
           <div className="flex flex-row gap-2">
-            <TypeCombobox typeId={type1Id} onChange={setType1Id} typeNumber={1} />
-            <TypeCombobox typeId={type2Id} onChange={setType2Id} typeNumber={2} />
+            <Type1Combobox label type1Id={type1Id} onChange={setType1Id} />
+            <Type2Combobox label type2Id={type2Id} onChange={setType2Id} />
           </div>
+
+          {/** Name and Form */}
+          <TextInput
+            label="Name"
+            value={newSpeciesName}
+            onChange={setNewSpeciesName}
+            invalid={newSpeciesName === null}
+          />
+          <TextInput
+            label="Form"
+            value={newSpeciesForm}
+            onChange={setNewSpeciesForm}
+          />
 
 
         </div>

@@ -14,6 +14,11 @@ export interface NumberInputProps {
   value: number | null;
 
   /**
+   * If the input is invalid
+   */
+  invalid?: boolean;
+
+  /**
    * When the value changes
    * 
    * @param value 
@@ -36,7 +41,8 @@ export function NumberInput({
   label,
   value,
   onChange,
-  width
+  width,
+  invalid = false
 }: NumberInputProps) {
 
   /**
@@ -66,6 +72,7 @@ export function NumberInput({
 
   return (
     <GInput
+      invalid={invalid}
       label={label}
       width={width}
       type="number"
