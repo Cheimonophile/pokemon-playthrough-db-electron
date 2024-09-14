@@ -3,7 +3,7 @@ import { LocationsTable } from "../tables/LocationsTable";
 import { useState } from "react";
 import { RegionCombobox } from "../form/field/comboboxes/RegionCombobox";
 import { TextInput } from "../form/field/inputs/TextInput";
-import { CreateLocationButton } from "../form/buttons/CreateLocationButton";
+import { CreateLocationButton } from "../form/buttons/location/CreateLocationButton";
 
 
 

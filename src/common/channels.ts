@@ -32,6 +32,7 @@ export const channels = Object.freeze({
   getLocations: makeRendererToMainChannel<{
     regionId?: string
   }, readonly Location[]>("getLocations"),
+  deleteLocation: makeRendererToMainChannel<string, void>("deleteLocation"),
 
   // playthrough channels
   getPlaythroughs: makeRendererToMainChannel<void, readonly Playthrough[]>("getPlaythroughs"),

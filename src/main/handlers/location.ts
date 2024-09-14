@@ -47,3 +47,22 @@ channels.getLocations.mainHandle(async (event, {
   });
   return locations;
 });
+
+
+/**
+ * Delete a location from the database
+ */
+channels.deleteLocation.mainHandle(async (event, locationId) => {
+  const window = getBrowserWindowFromWebContents(event.sender);
+  const locationDao = new LocationDao(databaseManager.getDatabase());
+  const location = await locationDao.read(locationId);
+  if (!location) {
+    throw new Error(`Location '${locationId}' not found`);
+  }
+  const confirmed = await openConfirmDialog(window, `Delete location ${location.name} from ${location.region.name}?`);
+  if (!confirmed) {
+    return;
+  }
+  await locationDao.delete(locationId);
+  WindowManager.notify();
+});

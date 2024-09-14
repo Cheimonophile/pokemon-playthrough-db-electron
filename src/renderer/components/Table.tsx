@@ -80,7 +80,7 @@ export function Table<T extends TableType>({
         {/** Table Header */}
         {columns.map((col, colIndex) => (
           <Fragment key={colIndex}>
-            <div className="border-b bg-white px-1 py-0.5 font-medium sticky top-0 text-nowrap">
+            <div className="border-b bg-white px-1 py-0.5 font-medium sticky top-0 text-nowrap z-10">
               {col.label}
             </div>
           </Fragment>

@@ -1,6 +1,7 @@
 import { FC, useMemo } from "react"
 import { Table, TableColumn } from "../Table"
 import { useLocations } from "@renderer/hooks/data/location";
+import { DeleteLocationButton } from "../form/buttons/location/DeleteLocationButton";
 
 
 /**
@@ -49,6 +50,16 @@ export const LocationsTable: FC<LocationsTableProps> = ({
    * Columns for the locations table
    */
   const columns = useMemo<TableColumn<string>[]>(() => [
+    {
+      label: "",
+      width: "3rem",
+      renderer: id => (
+        <DeleteLocationButton
+          text="X"
+          locationId={id}
+        />
+      )
+    },
     {
       label: "Region",
       width: "5rem",

@@ -1,6 +1,6 @@
 import { useAppContext } from "@renderer/app";
 import { useCallback } from "react";
-import { GButton } from "../GButton";
+import { GButton } from "../../GButton";
 
 
 export interface CreateLocationButtonProps {
@@ -46,7 +46,7 @@ export function CreateLocationButton({
   /**
    * Create a new location
    */
-  const handleOnClickCreateLocation = useCallback(async () => {
+  const hancleOnClick = useCallback(async () => {
     setIsLoading(true);
     try {
       if (!regionId || !name) return;
@@ -67,14 +67,14 @@ export function CreateLocationButton({
   /**
    * Whether the create location button is disabled
    */
-  const createLocationButtonDisabled = !regionId || !name;
+  const disabled = !regionId || !name;
 
 
   return (
     <GButton
       text={text}
-      onClick={handleOnClickCreateLocation}
-      disabled={createLocationButtonDisabled}
+      onClick={hancleOnClick}
+      disabled={disabled}
     />
   );
 }

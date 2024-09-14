@@ -29,6 +29,25 @@ export class LocationDao extends Dao {
   }
 
 
+  /**
+   * Read a location from the database
+   * 
+   * @param id 
+   * @returns 
+   */
+  async read(id: string): Promise<Location | null> {
+    const location = await this.connection.prisma.location.findUnique({
+      where: {
+        id
+      },
+      include: {
+        region: true
+      }
+    });
+    return location;
+  }
+
+
 
   /**
    * Read playthroughs from the database
@@ -67,5 +86,17 @@ export class LocationDao extends Dao {
       return eventANo - eventBNo;
     })
     return sortedLocations;
+  }
+
+
+  /**
+   * Delete a location from the database
+   */
+  async delete(id: string) {
+    await this.connection.prisma.location.delete({
+      where: {
+        id
+      }
+    });
   }
 }
