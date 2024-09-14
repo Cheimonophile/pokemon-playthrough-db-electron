@@ -3,6 +3,8 @@ import { RendererToMainChannel, makeRendererToMainChannel } from "./interfaces/c
 import { Location } from "./interfaces/models/Location";
 import { Playthrough } from "./interfaces/models/Playthrough";
 import { Region } from "./interfaces/models/Region";
+import { Species } from "./interfaces/models/Species";
+import { Type } from "./interfaces/models/Type";
 
 /**
  * Channels available to the application
@@ -19,10 +21,27 @@ export const channels = Object.freeze({
   createDatabaseFromOld: makeRendererToMainChannel<void, void>("createDatabaseFromOld"),
   openDatabase: makeRendererToMainChannel<void, void>("openDatabase"),
 
+
+  // type channels
+  getTypes: makeRendererToMainChannel<{
+    nameSearch?: string
+  }, readonly Type[]>("getTypes"),
+
   // region channels
   getRegions: makeRendererToMainChannel<{
     nameSearch?: string
   }, readonly Region[]>("getRegions"),
+
+  // species channels
+  createSpecies: makeRendererToMainChannel<{
+    generation: number,
+    dexNo: number,
+    type1Id: string,
+    type2Id: string | null,
+    name: string,
+    form: string | null
+  }, Species | null>("createSpecies"),
+  getSpecies: makeRendererToMainChannel<void, readonly Species[]>("getSpecies"),
 
   // location channels
   createLocation: makeRendererToMainChannel<{

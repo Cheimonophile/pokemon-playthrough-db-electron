@@ -5,3 +5,5 @@ import './handlers/database';
 import './handlers/region';
 import './handlers/location';
 import './handlers/playthrough';
+import './handlers/type';
+import './handlers/species';

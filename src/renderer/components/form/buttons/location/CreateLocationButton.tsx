@@ -46,7 +46,7 @@ export function CreateLocationButton({
   /**
    * Create a new location
    */
-  const hancleOnClick = useCallback(async () => {
+  const handleOnClick = useCallback(async () => {
     setIsLoading(true);
     try {
       if (!regionId || !name) return;
@@ -73,7 +73,7 @@ export function CreateLocationButton({
   return (
     <GButton
       text={text}
-      onClick={hancleOnClick}
+      onClick={handleOnClick}
       disabled={disabled}
     />
   );
