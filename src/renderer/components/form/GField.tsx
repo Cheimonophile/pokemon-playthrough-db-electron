@@ -32,7 +32,7 @@ export const GField: FC<GFieldProps> = ({
     <Field className="flex flex-col relative text-sm">
       {label && (
         <Label className={clsx(
-          "block font-bold",
+          "block font-bold leading-none",
           invalid && "italic"
         )}>
           {invalid && "!"}{label}

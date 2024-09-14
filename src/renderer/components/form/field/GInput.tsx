@@ -65,7 +65,7 @@ export function GInput({
       invalid={invalid}>
       <Input
         className={clsx(
-          " border rounded px-1 py-0.25"
+          " border rounded px-1 py-0.5"
         )}
         style={{ width }}
         type={type}

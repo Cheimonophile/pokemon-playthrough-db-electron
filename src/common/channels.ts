@@ -3,6 +3,7 @@ import { RendererToMainChannel, makeRendererToMainChannel } from "./interfaces/c
 import { Location } from "./interfaces/models/Location";
 import { Playthrough } from "./interfaces/models/Playthrough";
 import { Region } from "./interfaces/models/Region";
+import { Species } from "./interfaces/models/Species";
 import { Type } from "./interfaces/models/Type";
 
 /**
@@ -30,6 +31,16 @@ export const channels = Object.freeze({
   getRegions: makeRendererToMainChannel<{
     nameSearch?: string
   }, readonly Region[]>("getRegions"),
+
+  // species channels
+  createSpecies: makeRendererToMainChannel<{
+    generation: number,
+    dexNo: number,
+    type1Id: string,
+    type2Id: string | null,
+    name: string,
+    form: string | null
+  }, Species | null>("createSpecies"),
 
   // location channels
   createLocation: makeRendererToMainChannel<{

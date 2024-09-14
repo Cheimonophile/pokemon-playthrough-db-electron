@@ -5,6 +5,7 @@ import { Type2Combobox } from "../form/field/comboboxes/typeComboboxes/Type2Comb
 import { TextInput } from "../form/field/inputs/TextInput";
 import { GenerationInput } from "../form/field/inputs/numberInputs/GenerationInput";
 import { DexNoInput } from "../form/field/inputs/numberInputs/DexNoInput";
+import { CreateSpeciesButton } from "../form/buttons/species/CreateSpeciesButton";
 
 
 
@@ -28,7 +29,7 @@ export const SpeciesPage: PageFC = () => {
 
 
         {/** Inputs */}
-        <div className="flex flex-col w-52 overflow-auto">
+        <div className="flex flex-col w-52 overflow-auto gap-2">
 
           {/** Inputs */}
           <div className="flex flex-row gap-2">
@@ -55,6 +56,23 @@ export const SpeciesPage: PageFC = () => {
             value={newSpeciesForm}
             onChange={setNewSpeciesForm}
           />
+
+          {/** Create Button */}
+          {(generation && dexNo && type1Id && newSpeciesName) && <CreateSpeciesButton
+            generation={generation}
+            dexNo={dexNo}
+            type1Id={type1Id}
+            type2Id={type2Id}
+            name={newSpeciesName}
+            form={newSpeciesForm}
+            onSuccess={() => {
+              setDexNo(null);
+              setType1Id(null);
+              setType2Id(null);
+              setNewSpeciesName(null);
+              setNewSpeciesForm(null);
+            }}
+          />}
 
 
         </div>
