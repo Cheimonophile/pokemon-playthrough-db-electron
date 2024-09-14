@@ -3,6 +3,7 @@ import { BattlesPage } from "@renderer/components/pages/BattlesPage";
 import { LocationsPage } from "@renderer/components/pages/LocationsPage";
 import { PlaythroughsPage } from "@renderer/components/pages/PlaythroughsPage";
 import { SettingsPage } from "@renderer/components/pages/SettingsPage";
+import { SpeciesPage } from "@renderer/components/pages/SpeciesPage";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 
 
@@ -10,6 +11,7 @@ import { PageFC } from "@renderer/interfaces/components/PageFC";
 const PAGES = [
   "playthroughs",
   "locations",
+  "species",
   "battles",
   "settings",
 ] as const satisfies string[];
@@ -51,6 +53,11 @@ export const pageManifest: {
     label: "Locations",
     icon: "MapIcon",
     Component: LocationsPage
+  },
+  species: {
+    label: "Species",
+    icon: "BeakerIcon",
+    Component: SpeciesPage
   },
   battles: {
     label: "Battles",
