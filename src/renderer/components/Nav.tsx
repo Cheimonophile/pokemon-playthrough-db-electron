@@ -7,6 +7,7 @@ export const Nav: FC = () => {
     <nav className="w-24 flex flex-col bg-ball-grey">
       <NavButton page="battles" />
       <NavButton page="locations" />
+      <NavButton page="playthroughs" />
       <div className="flex-1" />
       <NavButton page="settings" />
     </nav>

@@ -1,3 +1,4 @@
+import { Version } from "./Version";
 
 /**
  * The playthrough id
@@ -29,4 +30,10 @@ export interface Playthrough {
    * The version name of the playthrough
    */
   readonly adventureStarted: Date;
+
+
+  /**
+   * The version of the playthrough
+   */
+  readonly version: Version
 }

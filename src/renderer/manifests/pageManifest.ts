@@ -1,12 +1,14 @@
 import { IconType } from "@renderer/components/Icon";
 import { BattlesPage } from "@renderer/components/pages/BattlesPage";
 import { LocationsPage } from "@renderer/components/pages/LocationsPage";
+import { PlaythroughsPage } from "@renderer/components/pages/PlaythroughsPage";
 import { SettingsPage } from "@renderer/components/pages/SettingsPage";
 import { PageFC } from "@renderer/interfaces/components/PageFC";
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PAGES = [
+  "playthroughs",
   "locations",
   "battles",
   "settings",
@@ -40,6 +42,11 @@ export interface PageMetadata {
 export const pageManifest: {
   [key in Page]: PageMetadata
 } = {
+  playthroughs: {
+    label: "Playthroughs",
+    icon: "PlayIcon",
+    Component: PlaythroughsPage
+  },
   locations: {
     label: "Locations",
     icon: "MapIcon",

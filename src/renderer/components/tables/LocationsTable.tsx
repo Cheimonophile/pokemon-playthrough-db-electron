@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react"
-import { Table, TableColumn } from "../Table"
+import { GTable, GTableColumn } from "../GTable"
 import { useLocations } from "@renderer/hooks/data/location";
 import { DeleteLocationButton } from "../form/buttons/location/DeleteLocationButton";
 
@@ -49,7 +49,7 @@ export const LocationsTable: FC<LocationsTableProps> = ({
   /**
    * Columns for the locations table
    */
-  const columns = useMemo<TableColumn<string>[]>(() => [
+  const columns = useMemo<GTableColumn<string>[]>(() => [
     {
       label: "",
       width: "3rem",
@@ -80,7 +80,7 @@ export const LocationsTable: FC<LocationsTableProps> = ({
 
 
   return (
-    <Table
+    <GTable
       ids={locationIds}
       columns={columns}
     />

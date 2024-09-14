@@ -8,13 +8,13 @@ type TableType = string | number;
 /**
  * Function Component for the table column renderer
  */
-export type TableColumnRenderer<T extends TableType> = (id: T) => ReactNode;
+export type GTableCellRenderer<T extends TableType> = (id: T) => ReactNode;
 
 
 /**
  * Type for a table column
  */
-export interface TableColumn<T extends TableType> {
+export interface GTableColumn<T extends TableType> {
 
 
   /**
@@ -30,7 +30,7 @@ export interface TableColumn<T extends TableType> {
   /**
    * The column's component
    */
-  readonly renderer: TableColumnRenderer<T>;
+  readonly renderer: GTableCellRenderer<T>;
 
 }
 
@@ -39,7 +39,7 @@ export interface TableColumn<T extends TableType> {
 /**
  * Props for the table component
  */
-export interface TableProps<T extends TableType> {
+export interface GTableProps<T extends TableType> {
 
   /**
    * The data for the table
@@ -50,7 +50,7 @@ export interface TableProps<T extends TableType> {
   /**
    * The columns for the table
    */
-  readonly columns: readonly TableColumn<T>[];
+  readonly columns: readonly GTableColumn<T>[];
 }
 
 
@@ -58,10 +58,10 @@ export interface TableProps<T extends TableType> {
 /**
  * Component for a table in the application
  */
-export function Table<T extends TableType>({
+export function GTable<T extends TableType>({
   ids,
   columns
-}: TableProps<T>) {
+}: GTableProps<T>) {
 
 
   /**
@@ -69,7 +69,7 @@ export function Table<T extends TableType>({
    * 
    * Adds an empty column with flex to fill the table
    */
-  const _columns = useMemo(() => [
+  const _columns = useMemo((): GTableColumn<T>[] => [
     ...columns,
     {
       label: "",
@@ -79,7 +79,6 @@ export function Table<T extends TableType>({
 
 
   return (
-
     <div id="Table" className="h-full w-full overflow-auto border">
 
       {/** Internal Table */}
